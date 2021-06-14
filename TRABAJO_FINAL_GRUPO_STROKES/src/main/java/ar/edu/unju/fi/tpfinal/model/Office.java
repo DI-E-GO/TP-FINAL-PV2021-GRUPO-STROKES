@@ -3,6 +3,15 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,18 +23,42 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
+@Table(name = "OFFICES")
 public class Office {
 	
 	//Atributos
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "office_code_id")
 	private String officeCode; 
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "address_line1")
 	private String addressLine1;
+	
+	@Column(name = "address_line2")
 	private String addressLine2;
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "country")
 	private String country;
+	
+	@Column(name = "postal_code")
 	private String postalCode;
+	
+	@Column(name = "territory")
 	private String territory;
+	
+	@OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
+	private Employee employee;
 	
 	/**
 	 * Contructores 
@@ -46,9 +79,10 @@ public class Office {
 	 * @param country
 	 * @param postalCode
 	 * @param territory
+	 * @param employee
 	 */
 	public Office(String officeCode, String city, String phone, String addressLine1, String addressLine2, String state,
-			String country, String postalCode, String territory) {
+			String country, String postalCode, String territory, Employee employee) {
 		super();
 		this.officeCode = officeCode;
 		this.city = city;
@@ -59,7 +93,10 @@ public class Office {
 		this.country = country;
 		this.postalCode = postalCode;
 		this.territory = territory;
+		this.employee = employee;
 	}
+
+
 	//Getters y setters
 
 	/**
@@ -186,6 +223,20 @@ public class Office {
 	 */
 	public void setTerritory(String territory) {
 		this.territory = territory;
+	}
+	
+	/**
+	 * @return the employee
+	 */
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	/**
+	 * @param employee the employee to set
+	 */
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	//Metodo toString

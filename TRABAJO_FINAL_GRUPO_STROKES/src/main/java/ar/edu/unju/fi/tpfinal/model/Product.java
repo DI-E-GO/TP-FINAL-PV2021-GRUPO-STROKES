@@ -1,16 +1,56 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "product_code_id")
 	private String productCode;
+	
+	@Column(name = "product_name")
 	private String productName;
+	
+	@ManyToOne
+	@JoinColumn(name = "product_line_id")
 	private ProductLine productLine;
+	
+	@Column(name = "product_scale")
 	private String productScale;
+	
+	@Column(name = "product_vendor")
 	private String productVendor;
+	
+	@Column(name = "product_description")
 	private String productDescription;
+	
+	@Column(name = "quantity_in_stock")
 	private short quantityInStock;
+	
+	@Column(name = "buy_price")
 	private double buyPrice;
+	
+	@Column(name = "msrp")
 	private double MSRP;
+	
+	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private OrderDetail orderDetail;
 	
 	public Product() {
 		// TODO Auto-generated constructor stub

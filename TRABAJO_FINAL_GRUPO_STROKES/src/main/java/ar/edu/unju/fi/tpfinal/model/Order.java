@@ -2,14 +2,51 @@ package ar.edu.unju.fi.tpfinal.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity
+@Table(name = "ORDERS")
 public class Order {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_number")
 	private int orderNumber;
+	
+	@Column(name = "order_date")
 	private LocalDate orderDate;
+	
+	@Column(name = "requires_date")
 	private LocalDate requiredDate;
+	
+	@Column(name = "shipped_date")
 	private LocalDate shippedDate;
+	
+	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "comments")
 	private String comments;
+	
+	@ManyToOne()
+	@JoinColumn(name = "customer_number_id")
 	private Customer customer;
+	
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+	private OrderDetail orderDetail;
 	
 	public Order() {
 		// TODO Auto-generated constructor stub

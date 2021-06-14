@@ -5,6 +5,16 @@ package ar.edu.unju.fi.tpfinal.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,14 +25,30 @@ import org.springframework.stereotype.Component;
  * Clase que almacena los pagos realizados por el cliente
  */
 @Component
+@Entity
+@Table(name = "PAYMENTS")
 public class Payment {
 
 	//Atributos
 	
-	private int customerNumber;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customer_number_id")
+	private Customer customerNumber;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "check_number_id")
 	private String checkNumber;
+	
+	@Column(name = "payment_date")
 	private Date paymentDate;
+	
+	@Column(name = "amount")
 	private Double amount;
+	
+	
 	
 	/**
 	 * Constructores
@@ -31,19 +57,21 @@ public class Payment {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	/**
 	 * @param customerNumber
 	 * @param checkNumber
 	 * @param paymentDate
 	 * @param amount
 	 */
-	public Payment(int customerNumber, String checkNumber, Date paymentDate, Double amount) {
+	public Payment(Customer customerNumber, String checkNumber, Date paymentDate, Double amount) {
 		super();
 		this.customerNumber = customerNumber;
 		this.checkNumber = checkNumber;
 		this.paymentDate = paymentDate;
 		this.amount = amount;
 	}
+
 	/**
 	 * Getters y setters
 	 */
@@ -51,21 +79,24 @@ public class Payment {
 	/**
 	 * @return the customerNumber
 	 */
-	public int getCustomerNumber() {
+	public Customer getCustomerNumber() {
 		return customerNumber;
 	}
+
 	/**
 	 * @param customerNumber the customerNumber to set
 	 */
-	public void setCustomerNumber(int customerNumber) {
+	public void setCustomerNumber(Customer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
+
 	/**
 	 * @return the checkNumber
 	 */
 	public String getCheckNumber() {
 		return checkNumber;
 	}
+	
 	/**
 	 * @param checkNumber the checkNumber to set
 	 */

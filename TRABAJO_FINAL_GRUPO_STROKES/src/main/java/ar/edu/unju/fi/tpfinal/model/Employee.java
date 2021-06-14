@@ -3,6 +3,19 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,18 +26,45 @@ import org.springframework.stereotype.Component;
  * Clase que almacena lod datos del empleado
  */
 @Component
+@Entity
+@Table(name = "EMPLOYEES")
 public class Employee {
 	
 	//Atributos 
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "employee_number_id")
 	private int employeeNumber;
+	
+	@Column(name = "last_name")
 	private String lastName;
+	
+	@Column(name = "first_name")
 	private String firstName;
+	
+	@Column(name = "extension")
 	private String extension;
+	
+	@Column(name = "email")
 	private String email;
-	private String officeCode;
-	private int reportsTo;
+	
+	@ManyToOne
+	@JoinColumn(name = "office_code_id")
+	private Office officeCode;
+	
+	@ManyToOne
+	@JoinColumn(name = "reports_to", referencedColumnName = "employee_number_id")
+	private Employee oneEmployee;
+	
+	@OneToMany(mappedBy = "oneEmployee")
+	private List<Employee> reportsTo;
+	
+	@Column(name = "job_title")
 	private String jobTitle;
+	
+	@OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+	private Customer customer;
 	
 	/**
 	 * Constructores
@@ -41,11 +81,13 @@ public class Employee {
 	 * @param extension
 	 * @param email
 	 * @param officeCode
+	 * @param oneEmployee
 	 * @param reportsTo
 	 * @param jobTitle
+	 * @param customer
 	 */
 	public Employee(int employeeNumber, String lastName, String firstName, String extension, String email,
-			String officeCode, int reportsTo, String jobTitle) {
+			Office officeCode, Employee oneEmployee, List<Employee> reportsTo, String jobTitle, Customer customer) {
 		super();
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
@@ -53,9 +95,15 @@ public class Employee {
 		this.extension = extension;
 		this.email = email;
 		this.officeCode = officeCode;
+		this.oneEmployee = oneEmployee;
 		this.reportsTo = reportsTo;
 		this.jobTitle = jobTitle;
+		this.customer = customer;
 	}
+
+
+
+
 
 	/**
 	 * Getters y Setters
@@ -133,28 +181,29 @@ public class Employee {
 	/**
 	 * @return the officeCode
 	 */
-	public String getOfficeCode() {
+	public Office getOfficeCode() {
 		return officeCode;
 	}
 
 	/**
 	 * @param officeCode the officeCode to set
 	 */
-	public void setOfficeCode(String officeCode) {
+	public void setOfficeCode(Office officeCode) {
 		this.officeCode = officeCode;
 	}
 
+	
 	/**
 	 * @return the reportsTo
 	 */
-	public int getReportsTo() {
+	public List<Employee> getReportsTo() {
 		return reportsTo;
 	}
 
 	/**
 	 * @param reportsTo the reportsTo to set
 	 */
-	public void setReportsTo(int reportsTo) {
+	public void setReportsTo(List<Employee> reportsTo) {
 		this.reportsTo = reportsTo;
 	}
 
@@ -170,6 +219,34 @@ public class Employee {
 	 */
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
+	}
+
+	/**
+	 * @return the customer
+	 */
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	/**
+	 * @param customer the customer to set
+	 */
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	/**
+	 * @return the oneEmployee
+	 */
+	public Employee getOneEmployee() {
+		return oneEmployee;
+	}
+
+	/**
+	 * @param oneEmployee the oneEmployee to set
+	 */
+	public void setOneEmployee(Employee oneEmployee) {
+		this.oneEmployee = oneEmployee;
 	}
 
 	//Metodo toString
