@@ -3,11 +3,11 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,7 +29,6 @@ public class Office {
 	
 	//Atributos
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "office_code_id")
 	private String officeCode; 
 	
@@ -57,8 +56,8 @@ public class Office {
 	@Column(name = "territory")
 	private String territory;
 	
-	@OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
-	private Employee employee;
+	@OneToMany(mappedBy = "officeCode", cascade = CascadeType.ALL)
+	private List<Employee> employee;
 	
 	/**
 	 * Contructores 
@@ -68,7 +67,7 @@ public class Office {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @param officeCode
 	 * @param city
@@ -79,10 +78,9 @@ public class Office {
 	 * @param country
 	 * @param postalCode
 	 * @param territory
-	 * @param employee
 	 */
 	public Office(String officeCode, String city, String phone, String addressLine1, String addressLine2, String state,
-			String country, String postalCode, String territory, Employee employee) {
+			String country, String postalCode, String territory) {
 		super();
 		this.officeCode = officeCode;
 		this.city = city;
@@ -93,11 +91,7 @@ public class Office {
 		this.country = country;
 		this.postalCode = postalCode;
 		this.territory = territory;
-		this.employee = employee;
 	}
-
-
-	//Getters y setters
 
 	/**
 	 * @return the officeCode
@@ -224,18 +218,18 @@ public class Office {
 	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
-	
+
 	/**
 	 * @return the employee
 	 */
-	public Employee getEmployee() {
+	public List<Employee> getEmployee() {
 		return employee;
 	}
 
 	/**
 	 * @param employee the employee to set
 	 */
-	public void setEmployee(Employee employee) {
+	public void setEmployee(List<Employee> employee) {
 		this.employee = employee;
 	}
 

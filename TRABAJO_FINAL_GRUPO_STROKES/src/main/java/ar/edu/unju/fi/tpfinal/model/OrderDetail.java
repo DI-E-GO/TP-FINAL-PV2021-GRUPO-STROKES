@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,8 +17,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "ORDER_DETAILS")
-public class OrderDetail {
+public class OrderDetail implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@OneToOne(fetch = FetchType.LAZY)
@@ -60,9 +67,6 @@ public class OrderDetail {
 		this.priceEach = priceEach;
 		this.orderLineNumber = orderLineNumber;
 	}
-
-
-
 
 	/**
 	 * @return the orderNumber

@@ -1,15 +1,10 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -20,14 +15,13 @@ import org.springframework.stereotype.Component;
 public class Product {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_code_id")
 	private String productCode;
 	
 	@Column(name = "product_name")
 	private String productName;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "product_line_id")
 	private ProductLine productLine;
 	
@@ -49,9 +43,6 @@ public class Product {
 	@Column(name = "msrp")
 	private double MSRP;
 	
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private OrderDetail orderDetail;
-	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
@@ -59,7 +50,6 @@ public class Product {
 	/**
 	 * @param productCode
 	 * @param productName
-	 * @param productLine
 	 * @param productScale
 	 * @param productVendor
 	 * @param productDescription
@@ -67,18 +57,17 @@ public class Product {
 	 * @param buyPrice
 	 * @param mSRP
 	 */
-	public Product(String productCode, String productName, ProductLine productLine, String productScale,
-			String productVendor, String productDescription, short quantityInStock, double buyPrice, double mSRP) {
+	public Product(String productCode, String productName, String productScale, String productVendor,
+			String productDescription, short quantityInStock, double buyPrice, double mSRP) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
-		this.productLine = productLine;
 		this.productScale = productScale;
 		this.productVendor = productVendor;
 		this.productDescription = productDescription;
 		this.quantityInStock = quantityInStock;
 		this.buyPrice = buyPrice;
-		MSRP = mSRP;
+		this.MSRP = mSRP;
 	}
 
 	/**
@@ -206,7 +195,7 @@ public class Product {
 	public void setMSRP(double mSRP) {
 		MSRP = mSRP;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Product [productCode=" + productCode + ", productName=" + productName + ", productLine=" + productLine

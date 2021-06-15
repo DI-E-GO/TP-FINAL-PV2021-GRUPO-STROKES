@@ -3,18 +3,18 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,22 +27,26 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "PAYMENTS")
-public class Payment {
+public class Payment implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	//Atributos
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_number_id")
 	private Customer customerNumber;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "check_number_id")
 	private String checkNumber;
 	
 	@Column(name = "payment_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date paymentDate;
 	
 	@Column(name = "amount")

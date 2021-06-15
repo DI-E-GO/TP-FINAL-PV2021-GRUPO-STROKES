@@ -8,8 +8,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +31,6 @@ public class Employee {
 	//Atributos 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_number_id")
 	private int employeeNumber;
 	
@@ -64,7 +61,7 @@ public class Employee {
 	private String jobTitle;
 	
 	@OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
-	private Customer customer;
+	private List<Customer> customer;
 	
 	/**
 	 * Constructores
@@ -80,34 +77,23 @@ public class Employee {
 	 * @param firstName
 	 * @param extension
 	 * @param email
-	 * @param officeCode
-	 * @param oneEmployee
-	 * @param reportsTo
 	 * @param jobTitle
-	 * @param customer
 	 */
 	public Employee(int employeeNumber, String lastName, String firstName, String extension, String email,
-			Office officeCode, Employee oneEmployee, List<Employee> reportsTo, String jobTitle, Customer customer) {
+			String jobTitle) {
 		super();
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.extension = extension;
 		this.email = email;
-		this.officeCode = officeCode;
-		this.oneEmployee = oneEmployee;
-		this.reportsTo = reportsTo;
 		this.jobTitle = jobTitle;
-		this.customer = customer;
 	}
-
-
-
-
 
 	/**
 	 * Getters y Setters
 	 */
+
 	/**
 	 * @return the employeeNumber
 	 */
@@ -192,7 +178,20 @@ public class Employee {
 		this.officeCode = officeCode;
 	}
 
-	
+	/**
+	 * @return the oneEmployee
+	 */
+	public Employee getOneEmployee() {
+		return oneEmployee;
+	}
+
+	/**
+	 * @param oneEmployee the oneEmployee to set
+	 */
+	public void setOneEmployee(Employee oneEmployee) {
+		this.oneEmployee = oneEmployee;
+	}
+
 	/**
 	 * @return the reportsTo
 	 */
@@ -224,31 +223,17 @@ public class Employee {
 	/**
 	 * @return the customer
 	 */
-	public Customer getCustomer() {
+	public List<Customer> getCustomer() {
 		return customer;
 	}
 
 	/**
 	 * @param customer the customer to set
 	 */
-	public void setCustomer(Customer customer) {
+	public void setCustomer(List<Customer> customer) {
 		this.customer = customer;
 	}
-
-	/**
-	 * @return the oneEmployee
-	 */
-	public Employee getOneEmployee() {
-		return oneEmployee;
-	}
-
-	/**
-	 * @param oneEmployee the oneEmployee to set
-	 */
-	public void setOneEmployee(Employee oneEmployee) {
-		this.oneEmployee = oneEmployee;
-	}
-
+	
 	//Metodo toString
 	@Override
 	public String toString() {
@@ -256,8 +241,4 @@ public class Employee {
 				+ ", extension=" + extension + ", email=" + email + ", officeCode=" + officeCode + ", reportsTo="
 				+ reportsTo + ", jobTitle=" + jobTitle + "]";
 	}
-	
-	
-	
-
 }

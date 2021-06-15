@@ -8,14 +8,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -37,7 +33,6 @@ public class Customer {
 	//Atributos
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "customer_number_id")
 	private int customerNumber;
 	
@@ -80,8 +75,8 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Order> order;
 	
-	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Payment payment;
+	//@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//private Payment payment;
 	
 	/**
 	 *Contructores 
@@ -104,14 +99,11 @@ public class Customer {
 	 * @param state
 	 * @param postalCode
 	 * @param country
-	 * @param employee
 	 * @param creditLimit
-	 * @param order
-	 * @param payment
 	 */
 	public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName,
 			String phone, String addressLine1, String addressLine2, String city, String state, String postalCode,
-			String country, Employee employee, Double creditLimit, List<Order> order, Payment payment) {
+			String country, Double creditLimit) {
 		super();
 		this.customerNumber = customerNumber;
 		this.customerName = customerName;
@@ -124,10 +116,7 @@ public class Customer {
 		this.state = state;
 		this.postalCode = postalCode;
 		this.country = country;
-		this.employee = employee;
 		this.creditLimit = creditLimit;
-		this.order = order;
-		this.payment = payment;
 	}
 
 
@@ -279,17 +268,17 @@ public class Customer {
 	}
 	/**
 	 * @return the payment
-	 */
+	
 	public Payment getPayment() {
 		return payment;
 	}
 	/**
 	 * @param payment the payment to set
-	 */
+	
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
-	/**
+	
 	 * @return the creditLimit
 	 */
 	public double getCreditLimit() {
@@ -325,7 +314,7 @@ public class Customer {
 				+ contactLastName + ", contactFirstName=" + contactFirstName + ", phone=" + phone + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", state=" + state
 				+ ", postalCode=" + postalCode + ", country=" + country + ", employee=" + employee + ", creditLimit="
-				+ creditLimit + ", order=" + order + ", payment=" + payment + "]";
+				+ creditLimit +"]";
 	}
 	
 	

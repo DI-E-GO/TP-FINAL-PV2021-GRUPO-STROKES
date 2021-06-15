@@ -1,10 +1,10 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 @Table(name = "PRODUCT_LINES")
 public class ProductLine {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_line_id")
 	private String productLine;
 	
@@ -29,8 +28,8 @@ public class ProductLine {
 	@Column(name = "image")
 	private String image;
 	
-	@OneToMany(mappedBy = "product_line", cascade = CascadeType.ALL)
-	private Product product;
+	@OneToMany(mappedBy = "productLine", cascade = CascadeType.ALL)
+	private List<Product> product;
 	
 	public ProductLine() {
 		// TODO Auto-generated constructor stub
@@ -41,16 +40,13 @@ public class ProductLine {
 	 * @param textDescription
 	 * @param htmlDescription
 	 * @param image
-	 * @param product
 	 */
-	public ProductLine(String productLine, String textDescription, String htmlDescription, String image,
-			Product product) {
+	public ProductLine(String productLine, String textDescription, String htmlDescription, String image) {
 		super();
 		this.productLine = productLine;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
-		this.product = product;
 	}
 
 	/**
@@ -112,14 +108,16 @@ public class ProductLine {
 	/**
 	 * @return the product
 	 */
-	public Product getProduct() {
+	public List<Product> getProduct() {
 		return product;
 	}
+
+
 
 	/**
 	 * @param product the product to set
 	 */
-	public void setProduct(Product product) {
+	public void setProduct(List<Product> product) {
 		this.product = product;
 	}
 
