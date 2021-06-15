@@ -1,11 +1,36 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.io.Serializable;
 
-public class OrderDetail {
-	private int orderNumber;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+@Entity
+@Table(name = "ORDERDETAILS")
+@Component
+public class OrderDetail implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8728717880434978150L;
+	@Id
+	@OneToOne
+	@JoinColumn(name = "orderNumber", insertable = false, updatable = false)
+	private Order order;
+	@Id
+	@OneToOne
+	@JoinColumn(name = "productCode", insertable = false, updatable = false)
 	private Product product;
+	@Column
 	private int quantityOrdered;
+	@Column
 	private double priceEach;
+	@Column
 	private short orderLineNumber;
 	
 	public OrderDetail() {
@@ -13,15 +38,15 @@ public class OrderDetail {
 	}
 
 	/**
-	 * @param orderNumber
+	 * @param order
 	 * @param product
 	 * @param quantityOrdered
 	 * @param priceEach
 	 * @param orderLineNumber
 	 */
-	public OrderDetail(int orderNumber, Product product, int quantityOrdered, double priceEach, short orderLineNumber) {
+	public OrderDetail(Order orderNumber, Product product, int quantityOrdered, double priceEach, short orderLineNumber, Order order) {
 		super();
-		this.orderNumber = orderNumber;
+		this.order = order;
 		this.product = product;
 		this.quantityOrdered = quantityOrdered;
 		this.priceEach = priceEach;
@@ -29,17 +54,17 @@ public class OrderDetail {
 	}
 
 	/**
-	 * @return the orderNumber
+	 * @return the order
 	 */
-	public int getOrderNumber() {
-		return orderNumber;
+	public Order getOrder() {
+		return order;
 	}
 
 	/**
-	 * @param orderNumber the orderNumber to set
+	 * @param order the order to set
 	 */
-	public void setOrderNumber(int orderNumber) {
-		this.orderNumber = orderNumber;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	/**
@@ -97,10 +122,10 @@ public class OrderDetail {
 	public void setOrderLineNumber(short orderLineNumber) {
 		this.orderLineNumber = orderLineNumber;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "OrderDetail [orderNumber=" + orderNumber + ", product=" + product + ", quantityOrdered="
+		return "OrderDetail [orderNumber=" + order + ", product=" + product + ", quantityOrdered="
 				+ quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber=" + orderLineNumber + "]";
 	}
 	

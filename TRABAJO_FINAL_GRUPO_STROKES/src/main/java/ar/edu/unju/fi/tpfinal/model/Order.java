@@ -2,15 +2,43 @@ package ar.edu.unju.fi.tpfinal.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "ORDERS")
+@Component
 public class Order {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "orderNumber")
 	private int orderNumber;
+	@Column
 	private LocalDate orderDate;
+	@Column
 	private LocalDate requiredDate;
+	@Column
 	private LocalDate shippedDate;
+	@Column
 	private String status;
+	@Column
 	private String comments;
+
+	@OneToOne
+	private OrderDetail orderDetail;
+	@ManyToOne
+	@JoinColumn(name = "customerNumber")
 	private Customer customer;
-	
+
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
@@ -25,7 +53,7 @@ public class Order {
 	 * @param customer
 	 */
 	public Order(int orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String status,
-			String comments, Customer customer) {
+			String comments, OrderDetail orderDetail, Customer customer) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderDate = orderDate;
@@ -33,6 +61,7 @@ public class Order {
 		this.shippedDate = shippedDate;
 		this.status = status;
 		this.comments = comments;
+		this.orderDetail = orderDetail;
 		this.customer = customer;
 	}
 
@@ -121,8 +150,23 @@ public class Order {
 	}
 
 	/**
+	 * @return the orderDetail
+	 */
+	public OrderDetail getOrderDetail() {
+		return orderDetail;
+	}
+
+	/**
+	 * @param orderDetail the orderDetail to set
+	 */
+	public void setOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
+	/**
 	 * @return the customer
 	 */
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -137,8 +181,8 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
-				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customer="
-				+ customer + "]";
+				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customer=" + 2
+				+ "]";
 	}
-	
+
 }

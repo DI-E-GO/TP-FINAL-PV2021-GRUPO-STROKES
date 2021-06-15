@@ -1,16 +1,46 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.stereotype.Component;
+
+@Entity
+@Table(name = "PRODUCTS")
+@Component
 public class Product {
+	@Id
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column(name = "productCode")
 	private String productCode;
+	@Column
 	private String productName;
+	@ManyToOne
+	@JoinColumn(name = "productLine")
 	private ProductLine productLine;
+	@Column
 	private String productScale;
+	@Column
 	private String productVendor;
+	@Column
 	private String productDescription;
+	@Column
 	private short quantityInStock;
+	@Column
 	private double buyPrice;
-	private double MSRP;
+	@Column
+	private double mSRP;
+	
+	@OneToOne
+	private OrderDetail orderDetail;
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
@@ -28,7 +58,7 @@ public class Product {
 	 * @param mSRP
 	 */
 	public Product(String productCode, String productName, ProductLine productLine, String productScale,
-			String productVendor, String productDescription, short quantityInStock, double buyPrice, double mSRP) {
+			String productVendor, String productDescription, short quantityInStock, double buyPrice, double mSRP, OrderDetail orderDetail) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
@@ -38,7 +68,8 @@ public class Product {
 		this.productDescription = productDescription;
 		this.quantityInStock = quantityInStock;
 		this.buyPrice = buyPrice;
-		MSRP = mSRP;
+		this.mSRP = mSRP;
+		this.orderDetail = orderDetail;
 	}
 
 	/**
@@ -156,15 +187,29 @@ public class Product {
 	/**
 	 * @return the mSRP
 	 */
-	public double getMSRP() {
-		return MSRP;
+	public double getmSRP() {
+		return mSRP;
 	}
 
 	/**
 	 * @param mSRP the mSRP to set
 	 */
-	public void setMSRP(double mSRP) {
-		MSRP = mSRP;
+	public void setmSRP(double mSRP) {
+		this.mSRP = mSRP;
+	}
+
+	/**
+	 * @return the orderDetail
+	 */
+	public OrderDetail getOrderDetail() {
+		return orderDetail;
+	}
+
+	/**
+	 * @param orderDetail the orderDetail to set
+	 */
+	public void setOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	@Override
@@ -172,7 +217,7 @@ public class Product {
 		return "Product [productCode=" + productCode + ", productName=" + productName + ", productLine=" + productLine
 				+ ", productScale=" + productScale + ", productVendor=" + productVendor + ", productDescription="
 				+ productDescription + ", quantityInStock=" + quantityInStock + ", buyPrice=" + buyPrice + ", MSRP="
-				+ MSRP + "]";
+				+ mSRP + "]";
 	}
 	
 }

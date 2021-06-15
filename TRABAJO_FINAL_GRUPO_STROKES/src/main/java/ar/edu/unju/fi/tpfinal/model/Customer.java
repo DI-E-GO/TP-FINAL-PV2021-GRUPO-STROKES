@@ -3,6 +3,16 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,25 +24,43 @@ import org.springframework.stereotype.Component;
  * Clase que almacena los datos del cliente
  */
 
+@Entity
+@Table(name = "CUSTOMERS")
 @Component
 public class Customer {
 
 	//Atributos
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private int customerNumber;
+	@Column
 	private String customerName;
+	@Column
 	private String contactLastName;
+	@Column
 	private String contactFirstName;
+	@Column
 	private String phone;
+	@Column
 	private String addressLine1;
+	@Column
 	private String addressLine2;
+	@Column
 	private String city;
+	@Column
 	private String state;
+	@Column
 	private String postalCode;
+	@Column
 	private String country;
+	@Column
 	private int salesRepEmployeeNumber;
+	@Column
 	private Double creditLimit;
 	
+	@OneToMany(mappedBy = "customer")
+	private List<Order> orders;
 	/**
 	 *Contructores 
 	 */
@@ -232,6 +260,18 @@ public class Customer {
 		this.creditLimit = creditLimit;
 	}
 	
+	/**
+	 * @return the orders
+	 */
+	public List<Order> getOrders() {
+		return orders;
+	}
+	/**
+	 * @param orders the orders to set
+	 */
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
 	//Metodo toString
 	@Override
 	public String toString() {
