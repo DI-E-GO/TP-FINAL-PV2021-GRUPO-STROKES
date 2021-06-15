@@ -3,6 +3,15 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,18 +23,41 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
+@Table(name = "OFFICES")
 public class Office {
 	
 	//Atributos
+	@Id
+	@Column(name = "office_code_id")
 	private String officeCode; 
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "address_line1")
 	private String addressLine1;
+	
+	@Column(name = "address_line2")
 	private String addressLine2;
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "country")
 	private String country;
+	
+	@Column(name = "postal_code")
 	private String postalCode;
+	
+	@Column(name = "territory")
 	private String territory;
+	
+	@OneToMany(mappedBy = "officeCode", cascade = CascadeType.ALL)
+	private List<Employee> employee;
 	
 	/**
 	 * Contructores 
@@ -35,7 +67,7 @@ public class Office {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * @param officeCode
 	 * @param city
@@ -60,7 +92,6 @@ public class Office {
 		this.postalCode = postalCode;
 		this.territory = territory;
 	}
-	//Getters y setters
 
 	/**
 	 * @return the officeCode
@@ -186,6 +217,20 @@ public class Office {
 	 */
 	public void setTerritory(String territory) {
 		this.territory = territory;
+	}
+
+	/**
+	 * @return the employee
+	 */
+	public List<Employee> getEmployee() {
+		return employee;
+	}
+
+	/**
+	 * @param employee the employee to set
+	 */
+	public void setEmployee(List<Employee> employee) {
+		this.employee = employee;
 	}
 
 	//Metodo toString

@@ -3,6 +3,17 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,23 +26,57 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
+@Table(name = "CUSTOMERS")
 public class Customer {
 
 	//Atributos
 	
+	@Id
+	@Column(name = "customer_number_id")
 	private int customerNumber;
+	
+	@Column(name = "customer_name")
 	private String customerName;
+	
+	@Column(name = "contact_last_name")
 	private String contactLastName;
+	
+	@Column(name = "contact_first_name")
 	private String contactFirstName;
+	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "address_line_1")
 	private String addressLine1;
+	
+	@Column(name = "address_line_2")
 	private String addressLine2;
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "postal_code")
 	private String postalCode;
+	
+	@Column(name = "country")
 	private String country;
-	private int salesRepEmployeeNumber;
+	
+	@ManyToOne()
+	@JoinColumn(name = "sales_rep_employee_number_id")
+	private Employee employee;
+	
+	@Column(name = "credit_limit")
 	private Double creditLimit;
+	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<Order> order;
+	
+	//@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//private Payment payment;
 	
 	/**
 	 *Contructores 
@@ -40,6 +85,8 @@ public class Customer {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	/**
 	 * @param customerNumber
 	 * @param customerName
@@ -52,12 +99,11 @@ public class Customer {
 	 * @param state
 	 * @param postalCode
 	 * @param country
-	 * @param salesRepEmployeeNumber
 	 * @param creditLimit
 	 */
 	public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName,
 			String phone, String addressLine1, String addressLine2, String city, String state, String postalCode,
-			String country, int salesRepEmployeeNumber, Double creditLimit) {
+			String country, Double creditLimit) {
 		super();
 		this.customerNumber = customerNumber;
 		this.customerName = customerName;
@@ -70,11 +116,11 @@ public class Customer {
 		this.state = state;
 		this.postalCode = postalCode;
 		this.country = country;
-		this.salesRepEmployeeNumber = salesRepEmployeeNumber;
 		this.creditLimit = creditLimit;
-		
-	//Getters y setters
 	}
+
+
+	//Getters y setters
 	/**
 	 * @return the customerNumber
 	 */
@@ -207,19 +253,32 @@ public class Customer {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
 	/**
-	 * @return the salesRepEmployeeNumber
+	 * @return the employee
 	 */
-	public int getSalesRepEmployeeNumber() {
-		return salesRepEmployeeNumber;
+	public Employee getEmployee() {
+		return employee;
 	}
 	/**
-	 * @param salesRepEmployeeNumber the salesRepEmployeeNumber to set
+	 * @param employee the employee to set
 	 */
-	public void setSalesRepEmployeeNumber(int salesRepEmployeeNumber) {
-		this.salesRepEmployeeNumber = salesRepEmployeeNumber;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	/**
+	 * @return the payment
+	
+	public Payment getPayment() {
+		return payment;
+	}
+	/**
+	 * @param payment the payment to set
+	
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+	
 	 * @return the creditLimit
 	 */
 	public double getCreditLimit() {
@@ -232,14 +291,31 @@ public class Customer {
 		this.creditLimit = creditLimit;
 	}
 	
+	/**
+	 * @return the order
+	 */
+	public List<Order> getOrder() {
+		return order;
+	}
+
+
+	/**
+	 * @param order the order to set
+	 */
+	public void setOrder(List<Order> order) {
+		this.order = order;
+	}
+
+
 	//Metodo toString
 	@Override
 	public String toString() {
 		return "Customer [customerNumber=" + customerNumber + ", customerName=" + customerName + ", contactLastName="
 				+ contactLastName + ", contactFirstName=" + contactFirstName + ", phone=" + phone + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", state=" + state
-				+ ", postalCode=" + postalCode + ", country=" + country + ", salesRepEmployeeNumber="
-				+ salesRepEmployeeNumber + ", creditLimit=" + creditLimit + "]";
+				+ ", postalCode=" + postalCode + ", country=" + country + ", employee=" + employee + ", creditLimit="
+				+ creditLimit +"]";
 	}
+	
 	
 }

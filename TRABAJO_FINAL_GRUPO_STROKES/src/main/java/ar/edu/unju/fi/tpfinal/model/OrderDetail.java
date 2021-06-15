@@ -1,16 +1,55 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.io.Serializable;
 
-public class OrderDetail {
-	private int orderNumber;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity
+@Table(name = "ORDER_DETAILS")
+public class OrderDetail implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_number_id")
+	private Order orderNumber;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_code_id")
 	private Product product;
+	
+	@Column(name = "quantity_ordered")
 	private int quantityOrdered;
+	
+	@Column(name = "price_each")
 	private double priceEach;
+	
+	@Column(name = "order_line_number")
 	private short orderLineNumber;
 	
 	public OrderDetail() {
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	/**
 	 * @param orderNumber
@@ -19,7 +58,8 @@ public class OrderDetail {
 	 * @param priceEach
 	 * @param orderLineNumber
 	 */
-	public OrderDetail(int orderNumber, Product product, int quantityOrdered, double priceEach, short orderLineNumber) {
+	public OrderDetail(Order orderNumber, Product product, int quantityOrdered, double priceEach,
+			short orderLineNumber) {
 		super();
 		this.orderNumber = orderNumber;
 		this.product = product;
@@ -31,14 +71,14 @@ public class OrderDetail {
 	/**
 	 * @return the orderNumber
 	 */
-	public int getOrderNumber() {
+	public Order getOrderNumber() {
 		return orderNumber;
 	}
 
 	/**
 	 * @param orderNumber the orderNumber to set
 	 */
-	public void setOrderNumber(int orderNumber) {
+	public void setOrderNumber(Order orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 

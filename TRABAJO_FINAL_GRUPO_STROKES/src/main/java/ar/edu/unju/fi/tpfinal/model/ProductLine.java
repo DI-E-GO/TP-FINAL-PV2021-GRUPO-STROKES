@@ -1,10 +1,35 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@Entity
+@Table(name = "PRODUCT_LINES")
 public class ProductLine {
+	@Id
+	@Column(name = "product_line_id")
 	private String productLine;
+	
+	@Column(name = "text_description")
 	private String textDescription;
+	
+	@Column(name = "html_description")
 	private String htmlDescription;
+	
+	@Column(name = "image")
 	private String image;
+	
+	@OneToMany(mappedBy = "productLine", cascade = CascadeType.ALL)
+	private List<Product> product;
 	
 	public ProductLine() {
 		// TODO Auto-generated constructor stub
@@ -78,6 +103,22 @@ public class ProductLine {
 	 */
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	/**
+	 * @return the product
+	 */
+	public List<Product> getProduct() {
+		return product;
+	}
+
+
+
+	/**
+	 * @param product the product to set
+	 */
+	public void setProduct(List<Product> product) {
+		this.product = product;
 	}
 
 	@Override
