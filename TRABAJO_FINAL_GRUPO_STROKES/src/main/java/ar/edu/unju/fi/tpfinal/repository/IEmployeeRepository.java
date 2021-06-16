@@ -9,5 +9,5 @@ import ar.edu.unju.fi.tpfinal.model.Employee;
 
 public interface IEmployeeRepository extends CrudRepository<Employee, Long>{
 	public List<Employee> findAll();
-	public Optional<Employee> findByProductCode();
+	public Optional<Employee> findByEmployeeNumber(Long employeeNumber);
 }

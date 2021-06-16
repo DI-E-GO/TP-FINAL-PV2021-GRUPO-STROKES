@@ -36,7 +36,7 @@ public class Payment implements Serializable{
 
 	//Atributos
 	
-	@Id
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_number_id")
 	private Customer customerNumber;
