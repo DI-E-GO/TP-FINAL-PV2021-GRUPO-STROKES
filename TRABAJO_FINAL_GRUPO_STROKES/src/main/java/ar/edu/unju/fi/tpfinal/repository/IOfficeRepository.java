@@ -9,5 +9,5 @@ import ar.edu.unju.fi.tpfinal.model.Office;
 
 public interface IOfficeRepository extends CrudRepository<Office, String>{
 	public List<Office> findAll();
-	public Optional<Office> findByProductCode();
+	public Optional<Office> findByOfficeCode(String officeCode);
 }

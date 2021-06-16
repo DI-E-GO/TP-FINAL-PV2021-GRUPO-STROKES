@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpfinal.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,7 +27,7 @@ public class ProductLine {
 	private String htmlDescription;
 	
 	@Column(name = "image")
-	private String image;
+	private byte[] image;
 	
 	@OneToMany(mappedBy = "productLine", cascade = CascadeType.ALL)
 	private List<Product> product;
@@ -40,14 +41,17 @@ public class ProductLine {
 	 * @param textDescription
 	 * @param htmlDescription
 	 * @param image
+	 * @param product
 	 */
-	public ProductLine(String productLine, String textDescription, String htmlDescription, String image) {
+	public ProductLine(String productLine, String textDescription, String htmlDescription, byte[] image) {
 		super();
 		this.productLine = productLine;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
+
+
 
 	/**
 	 * @return the productLine
@@ -94,14 +98,14 @@ public class ProductLine {
 	/**
 	 * @return the image
 	 */
-	public String getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(String image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -111,8 +115,6 @@ public class ProductLine {
 	public List<Product> getProduct() {
 		return product;
 	}
-
-
 
 	/**
 	 * @param product the product to set
@@ -124,7 +126,7 @@ public class ProductLine {
 	@Override
 	public String toString() {
 		return "ProductLine [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
-				+ htmlDescription + ", image=" + image + "]";
+				+ htmlDescription + ", image=" + Arrays.toString(image) + ", product=" + product + "]";
 	}
 	
 }

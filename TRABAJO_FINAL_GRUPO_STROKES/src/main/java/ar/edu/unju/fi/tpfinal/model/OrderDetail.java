@@ -3,13 +3,8 @@ package ar.edu.unju.fi.tpfinal.model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -23,18 +18,9 @@ public class OrderDetail implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_number_id")
-	private Order orderNumber;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_code_id")
-	private Product product;
+	@EmbeddedId
+	private OrderDetailId id;
 	
 	@Column(name = "quantity_ordered")
 	private int quantityOrdered;
@@ -48,52 +34,34 @@ public class OrderDetail implements Serializable {
 	public OrderDetail() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
-
 	/**
-	 * @param orderNumber
-	 * @param product
+	 * @param id
 	 * @param quantityOrdered
 	 * @param priceEach
 	 * @param orderLineNumber
 	 */
-	public OrderDetail(Order orderNumber, Product product, int quantityOrdered, double priceEach,
-			short orderLineNumber) {
+	public OrderDetail(OrderDetailId id, int quantityOrdered, double priceEach, short orderLineNumber) {
 		super();
-		this.orderNumber = orderNumber;
-		this.product = product;
+		this.id = id;
 		this.quantityOrdered = quantityOrdered;
 		this.priceEach = priceEach;
 		this.orderLineNumber = orderLineNumber;
 	}
 
+
 	/**
-	 * @return the orderNumber
+	 * @return the id
 	 */
-	public Order getOrderNumber() {
-		return orderNumber;
+	public OrderDetailId getId() {
+		return id;
 	}
 
 	/**
-	 * @param orderNumber the orderNumber to set
+	 * @param id the id to set
 	 */
-	public void setOrderNumber(Order orderNumber) {
-		this.orderNumber = orderNumber;
-	}
-
-	/**
-	 * @return the product
-	 */
-	public Product getProduct() {
-		return product;
-	}
-
-	/**
-	 * @param product the product to set
-	 */
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setId(OrderDetailId id) {
+		this.id = id;
 	}
 
 	/**
@@ -140,8 +108,7 @@ public class OrderDetail implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OrderDetail [orderNumber=" + orderNumber + ", product=" + product + ", quantityOrdered="
-				+ quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber=" + orderLineNumber + "]";
+		return "OrderDetail [quantityOrdered=" + quantityOrdered + ", priceEach=" + priceEach + ", orderLineNumber=" + orderLineNumber + "]";
 	}
 	
 }

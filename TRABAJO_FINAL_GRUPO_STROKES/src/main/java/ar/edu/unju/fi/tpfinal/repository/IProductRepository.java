@@ -9,5 +9,5 @@ import ar.edu.unju.fi.tpfinal.model.Product;
 
 public interface IProductRepository extends CrudRepository<Product, String>{
 	public List<Product> findAll();
-	public Optional<Product> findByProductCode();
+	public Optional<Product> findByProductCode(String productCode);
 }
