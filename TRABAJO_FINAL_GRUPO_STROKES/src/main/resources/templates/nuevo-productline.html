@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout/head :: myhead">
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/productline/lista"> Ver tabla</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Nueva Linea de Producto</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/productline/guardar}"
+							th:object="${productline}" method="POST">
+							<div class="row mb-3">
+								<label for="codigo" class="col-sm-3 col-form-label fw-bold">Código</label>
+								<div class="col-sm-9">
+									<input type="text" th:field="*{productLine}"
+										class="rounded-pill form-control" id="codigo">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="descripcion" class="col-sm-3 col-form-label fw-bold">Descripción</label>
+								<div class="col-sm-9">
+									<input type="text" th:field="*{textDescription}"
+										class="rounded-pill form-control" id="descripcion">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="descripcionHttp"
+									class="col-sm-3 col-form-label fw-bold">Dirección</label>
+								<div class="col-sm-9">
+									<input type="text" th:field="*{htmlDescription}"
+										class="rounded-pill form-control" id="descripcionHttp">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="image" class="col-sm-3 col-form-label fw-bold">Imagen</label>
+								<div class="col-sm-9">
+									<input type="file" th:field="*{image}"
+										class="rounded-pill form-control" id="image">
+								</div>
+							</div>
+							<div class="pt-2 text-center">
+								<button type="reset"
+									class="btn btn-outline-danger rounded-pill">
+									Cancelar <i class="bi bi-x-circle-fill"></i>
+								</button>
+								<button type="submit"
+									class="btn btn-outline-success rounded-pill">
+									Guardar <i class="bi bi-check-circle-fill"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<aside th:insert="layout/advertising :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

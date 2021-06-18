@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<!-- Required meta tags -->
+	<meta content="text/html" charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div id="footer" th:fragment="footer">
+		<div class="bg-dark bg-gradient text-white pt-5">
+			<div class="row m-2">
+				<div class="col-md-4 mb-4">
+					<h5>¿Quienes somos?</h5>
+					<p>Somos la compañía tecnológica de comercio electrónico líder de América Latina y nuestro propósito es democratizar el comercio y el dinero para impactar en el desarrollo de la región.</p>
+					<p>Nacimos en 1999 y actualmente operamos en 19 países de la región. En pocos años, logramos convertirnos en la séptima plataforma de comercio electrónico del mundo</p>
+				</div>
+				<div class="text-center col-md-4 mb-4">
+					<h5 class="text-start">Enlaces rápidos</h5>
+					<a href="#" style="color: white; text-decoration: none;">Linkedin <i class="bi bi-linkedin"></i></a> <br>
+					<a href="#" style="color: white; text-decoration: none;">GitHub <i class="bi bi-github"></i></a> <br>
+					<a href="#" style="color: white; text-decoration: none;">Facebook <i class="bi bi-facebook"></i></a> <br>
+					<a href="#" style="color: white; text-decoration: none;">Instagram <i class="bi bi-instagram"></i></a>
+				</div>
+				<div class="text-end col-md-4">
+					<h5 class="text-start">Visita nuestra tienda</h5>
+					<p class="text-start">Para disfrutar de una mayor experiencia en nuestra comunidad puedes comprar rangos, gemas y muchas más cosas... </p>
+					<button type="button" class="btn btn-outline-secondary">ir a la Tienda</button>
+				</div>
+			</div>
+			<div class="p-2">
+				<h6 class="text-center">2021 &copy; Programacion Visual</h6>
+			</div>
+		</div>
+
+		<!--Bootstrap JavaScript-->
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js}"></script>
+	</div>
+</body>
+</html>
