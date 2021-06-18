@@ -1,0 +1,16 @@
+body{
+	background-color: #fdf8f2!important;
+}
+.card{
+	border-radius: 1.25rem!important;
+}
+.card-header{
+	background-color: rgb(25 135 84 / 82%)!important;
+	border-radius: calc(1.25rem - 1px) calc(1.25rem - 1px) 0 0 !important;
+}
+.dropdown-menu{
+	border-radius: 1.25rem !important;
+}
+.dropdown-item{
+	border-radius: .50rem !important;
+}

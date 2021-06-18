@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div id="header" th:fragment="header">
+		<div class="bg-dark bg-gradient text-white text-center">
+			<img th:src="@{/image/logo-strokes.png}" class="img-fluid" alt="logo" style="width: 200px; height: 200px;">
+		</div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container p-3">
+				<a class="navbar-brand" href="#"><i class="bi bi-arrow-return-left"></i></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+					aria-controls="navbarColor02" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarColor02">
+					<ul class="navbar-nav me-auto">
+						<li class="nav-item"><a class="nav-link" href="#">Noticias</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="#">Contáctenos</a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+							href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/productline/nuevo">Linea de Producto - Crear <i class="bi bi-save"></i></a> 
+								<a class="dropdown-item" href="/productline/lista">Linea de Producto - Listar <i class="bi bi-view-list"></i></a> 
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Producto - Crear <i class="bi bi-save"></i></a>
+								<a class="dropdown-item" href="#">Producto - Listar <i class="bi bi-view-list"></i></a>
+							</div></li>
+					</ul>
+					<form class="d-flex">
+						<label class="form-text me-sm-2 text-white">Usuario invitado</label>
+						<button class="btn btn-success rounded-circle" type="submit"><i class="bi bi-person-circle"></i></button>
+					</form>
+				</div>
+			</div>
+		</nav>
+		
+	</div>
+</body>
+</html>
