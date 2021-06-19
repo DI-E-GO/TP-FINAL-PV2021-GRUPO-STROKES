@@ -7,6 +7,11 @@
 </head>
 <body>
 	<div th:insert="layout/header :: header"></div>
+	<div th:if="${mensajeBorrar!=null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong th:text="${mensajeBorrar}"></strong><a class="alert-link" th:href="@{/productline/borrar/}+${productLine}"> Continuar</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
 	<div class="container">
 		<div class="row">
 			<h3 class="text-center mt-3">Listado de Lineas de Productos</h3>
@@ -27,44 +32,22 @@
 								<td th:text="${pline.productLine}"></td>
 								<td th:text="${pline.textDescription}"></td>
 								<td th:text="${pline.htmlDescription}"></td>
-								<td>000</td>
+								<td class="text-center"><img class="card-img-top" th:src="*{'data:image/jpeg;base64,'+{pline.image}}" alt="..."></td>
 								<td class="text-center">
 									<div class="btn-group btn-group-sm" role="group">
-										<button type="button" class="btn btn-warning">
+										<a th:href="@{/productline/editar/}+${pline.productLine}" type="button" class="btn btn-warning">
 											<i class="bi bi-pencil-fill"></i>
-										</button>
-										<button type="button" class="btn btn-danger"
-										data-bs-toggle="modal" data-bs-target="#exampleModal2">
+										</a>
+										<a th:href="@{/productline/seleccionar/}+${pline.productLine}" type="button" class="btn btn-danger">
 											<i class="bi bi-trash2-fill"></i>
-										</button>
+										</a>
 									</div>
 								</td>
 							</tr>
 						</tbody>
 					</table>
-
-					<!-- Modal -->
-					<div class="modal fade" id="exampleModal2" tabindex="-1"
-						aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content bg-danger text-white">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Borrar una Linea de Producto</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">Usted está por eliminar de la base de datos una Linea de Producto. Estas seguro de continuar?</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">Cancelar</button>
-									<button type="button" class="btn btn-primary">Continuar</button>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<div th:insert="layout/footer :: footer"></div>
