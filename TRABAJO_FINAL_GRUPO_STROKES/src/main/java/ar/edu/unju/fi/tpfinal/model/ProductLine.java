@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.tpfinal.model;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -20,14 +20,15 @@ public class ProductLine {
 	@Column(name = "product_line_id")
 	private String productLine;
 	
+	@Size(max = 4000)
 	@Column(name = "text_description")
 	private String textDescription;
 	
 	@Column(name = "html_description")
 	private String htmlDescription;
 	
-	@Column(name = "image")
-	private byte[] image;
+	@Column(name = "image", columnDefinition = "MEDIUMBLOB")
+	private String image;
 	
 	@OneToMany(mappedBy = "productLine", cascade = CascadeType.ALL)
 	private List<Product> product;
@@ -43,15 +44,13 @@ public class ProductLine {
 	 * @param image
 	 * @param product
 	 */
-	public ProductLine(String productLine, String textDescription, String htmlDescription, byte[] image) {
+	public ProductLine(String productLine, String textDescription, String htmlDescription, String image) {
 		super();
 		this.productLine = productLine;
 		this.textDescription = textDescription;
 		this.htmlDescription = htmlDescription;
 		this.image = image;
 	}
-
-
 
 	/**
 	 * @return the productLine
@@ -98,14 +97,14 @@ public class ProductLine {
 	/**
 	 * @return the image
 	 */
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -126,7 +125,7 @@ public class ProductLine {
 	@Override
 	public String toString() {
 		return "ProductLine [productLine=" + productLine + ", textDescription=" + textDescription + ", htmlDescription="
-				+ htmlDescription + ", image=" + Arrays.toString(image) + ", product=" + product + "]";
+				+ htmlDescription + ", image=" + image + ", product=" + product + "]";
 	}
 	
 }

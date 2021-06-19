@@ -21,9 +21,9 @@
 					</div>
 					<div class="card-body">
 						<form th:action="@{/productline/guardar}"
-							th:object="${productline}" method="POST">
+							th:object="${productline}" method="POST" enctype="multipart/form-data">
 							<div class="row mb-3">
-								<label for="codigo" class="col-sm-3 col-form-label fw-bold">Código</label>
+								<label for="codigo" class="col-sm-3 col-form-label fw-bold">Tipo</label>
 								<div class="col-sm-9">
 									<input type="text" th:field="*{productLine}"
 										class="rounded-pill form-control" id="codigo">
@@ -32,8 +32,8 @@
 							<div class="row mb-3">
 								<label for="descripcion" class="col-sm-3 col-form-label fw-bold">Descripción</label>
 								<div class="col-sm-9">
-									<input type="text" th:field="*{textDescription}"
-										class="rounded-pill form-control" id="descripcion">
+									<textarea th:field="*{textDescription}"
+										class="form-control" id="descripcion"></textarea>
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -47,7 +47,7 @@
 							<div class="row mb-3">
 								<label for="image" class="col-sm-3 col-form-label fw-bold">Imagen</label>
 								<div class="col-sm-9">
-									<input type="file" th:field="*{image}"
+									<input type="file" name="file"
 										class="rounded-pill form-control" id="image">
 								</div>
 							</div>
