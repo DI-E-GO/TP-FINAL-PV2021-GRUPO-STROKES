@@ -54,8 +54,8 @@ public class ProductLineController {
 	}
 	@GetMapping("/productline/seleccionar/{productLine}")
 	public String selectProductLine(@PathVariable String productLine, Model model) {
-		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: ";
 		Optional<ProductLine> prodLine = productLineService.getProductLine(productLine);
+		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: "+prodLine.get().getProductLine()+" ";
 		model.addAttribute("productline", prodLine);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
 		model.addAttribute("productlines", productLineService.getProductLines());
