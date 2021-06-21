@@ -60,7 +60,7 @@ public class Employee {
 	@Column(name = "job_title")
 	private String jobTitle;
 	
-	@OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "salesRepEmployeeNumber",cascade = CascadeType.ALL)
 	private List<Customer> customer;
 	
 	/**

@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,12 +22,15 @@ public class Order {
 	private int orderNumber;
 	
 	@Column(name = "order_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate orderDate;
 	
-	@Column(name = "requires_date")
+	@Column(name = "required_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate requiredDate;
 	
 	@Column(name = "shipped_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate shippedDate;
 	
 	@Column(name = "status")
@@ -37,7 +41,7 @@ public class Order {
 	
 	@ManyToOne()
 	@JoinColumn(name = "customer_number_id")
-	private Customer customer;
+	private Customer customerNumber;
 	
 	//@OneToOne(mappedBy = "orderNumber", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
 	//private OrderDetail orderDetail;
@@ -153,14 +157,14 @@ public class Order {
 	 * @return the customer
 	 */
 	public Customer getCustomer() {
-		return customer;
+		return customerNumber;
 	}
 
 	/**
 	 * @param customer the customer to set
 	 */
 	public void setCustomer(Customer customer) {
-		this.customer = customer;
+		this.customerNumber = customer;
 	}
 
 	/**
@@ -180,8 +184,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate
-				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + ", customer="
-				+ customer + "]";
+				+ ", shippedDate=" + shippedDate + ", status=" + status + ", comments=" + comments + "]";
 	}
 	
 }

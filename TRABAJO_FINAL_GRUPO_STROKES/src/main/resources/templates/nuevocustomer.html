@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:insert="layout/head :: myhead">
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Registro de Clientes</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/cliente/guardar}" th:object="${customer}" method="POST">
+							<div class="row mb-3">
+								<label for="numCliente" class="col-sm-3 col-form-label fw-bold">N° de Cliente</label>
+							    <div class="col-sm-9">
+							      <input type="number" class="form-control rounded-pill" th:field="*{customerNumber}" id="numCliente" title="Ingrese numero de cliente">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="nameCliente" class="col-sm-3 col-form-label fw-bold">Nombre de su Negocio</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{customerName}" id="nameCliente" title="Ingrese el nombre de su negocio">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="apellidoCliente" class="col-sm-3 col-form-label fw-bold">Apellido</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{contactLastName}" id="apellidoCliente" placeholder="Ingrese su apellido" title="Ingrese su apellido">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="nombreCliente" class="col-sm-3 col-form-label fw-bold">Nombre</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{contactFirstName}" id="nombreCliente" placeholder="Ingrese su nombre" title="Ingrese su nombre">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="telefono" class="col-sm-3 col-form-label fw-bold">N° de Telefono</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{phone}" id="telefono" placeholder="Ingrese numero de telefono" title="Ingrese numero de telefono">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="direccion" class="col-sm-3 col-form-label fw-bold">Direccion</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{addressLine1}" id="direccion" placeholder="Ingrese su direccion" title="Ingrese su direccion">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="direccion2" class="col-sm-3 col-form-label fw-bold">Direccion Secundaria</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{addressLine2}" id="direccion2" placeholder="Ingrese otra direccion" title="Ingrese otra direccion">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="provincia" class="col-sm-3 col-form-label fw-bold">Provincia</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{city}" id="provincia" placeholder="Ingrese Provincia de residencia" title="Ingrese provincia de residencia">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="estado" class="col-sm-3 col-form-label fw-bold">Localidad/Ciudad</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{state}" id="estado" placeholder="Ingrese ciudad de residencia" title="Ingrese ciudad de residencia">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="codpostal" class="col-sm-3 col-form-label fw-bold">Codigo Postal</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{postalCode}" id="codpostal" placeholder="Ingrese codigo postal" title="Ingrese codigo postal">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="pais" class="col-sm-3 col-form-label fw-bold">País</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{country}" id="pais" placeholder="Ingrese Pais" title="Ingrese pais">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="codvend" class="col-sm-3 col-form-label fw-bold">Codigo de vendedor</label>
+							    <div class="col-sm-9">
+							    	<select class="form-select rounded-pill" id="codvend" th:field="*{employee.employeeNumber}">
+										<option th:each="codVend : ${employees}" th:value="${codVend.employeeNumber}" th:text="${codVend.firstName}"></option>
+									</select>
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="limiteCred" class="col-sm-3 col-form-label fw-bold">Limite de Credito</label>
+							    <div class="col-sm-9">
+							      <input type="number" class="form-control rounded-pill" th:field="*{creditLimit}" id="limiteCred" placeholder="Ingrese su limite de credito" title="Ingrese su limite de credito">
+							    </div>
+							</div>
+							 <div class="pt-2 text-center">
+							 	 <button type="reset"
+									class="btn btn-outline-danger rounded-pill">
+									Cancelar <i class="bi bi-x-circle-fill"></i>
+								</button>
+								<button type="submit"
+									class="btn btn-outline-success rounded-pill">
+									Guardar <i class="bi bi-check-circle-fill"></i>
+								</button>
+							 </div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<aside th:insert="layout/advertising :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

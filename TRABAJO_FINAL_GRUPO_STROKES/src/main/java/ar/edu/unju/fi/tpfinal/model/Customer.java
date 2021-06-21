@@ -44,6 +44,7 @@ public class Customer {
 	
 	@Column(name = "contact_first_name")
 	private String contactFirstName;
+	
 	@Column(name = "phone")
 	private String phone;
 	
@@ -67,16 +68,13 @@ public class Customer {
 	
 	@ManyToOne()
 	@JoinColumn(name = "sales_rep_employee_number_id")
-	private Employee employee;
+	private Employee salesRepEmployeeNumber;
 	
 	@Column(name = "credit_limit")
 	private Double creditLimit;
 	
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customerNumber", cascade = CascadeType.ALL)
 	private List<Order> order;
-	
-	//@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	//private Payment payment;
 	
 	/**
 	 *Contructores 
@@ -258,30 +256,18 @@ public class Customer {
 	 * @return the employee
 	 */
 	public Employee getEmployee() {
-		return employee;
+		return salesRepEmployeeNumber;
 	}
 	/**
 	 * @param employee the employee to set
 	 */
 	public void setEmployee(Employee employee) {
-		this.employee = employee;
+		this.salesRepEmployeeNumber = employee;
 	}
-	/**
-	 * @return the payment
-	
-	public Payment getPayment() {
-		return payment;
-	}
-	/**
-	 * @param payment the payment to set
-	
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-	
+	/*
 	 * @return the creditLimit
 	 */
-	public double getCreditLimit() {
+	public Double getCreditLimit() {
 		return creditLimit;
 	}
 	/**
@@ -313,7 +299,7 @@ public class Customer {
 		return "Customer [customerNumber=" + customerNumber + ", customerName=" + customerName + ", contactLastName="
 				+ contactLastName + ", contactFirstName=" + contactFirstName + ", phone=" + phone + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", state=" + state
-				+ ", postalCode=" + postalCode + ", country=" + country + ", employee=" + employee + ", creditLimit="
+				+ ", postalCode=" + postalCode + ", country=" + country + ", creditLimit="
 				+ creditLimit +"]";
 	}
 	
