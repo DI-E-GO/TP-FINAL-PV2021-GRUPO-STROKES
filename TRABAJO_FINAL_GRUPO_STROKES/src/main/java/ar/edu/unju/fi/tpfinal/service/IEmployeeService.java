@@ -11,4 +11,5 @@ public interface IEmployeeService {
 	public void deleteEmployee(Long employeeNumber);
 	public Optional<Employee> getEmployee(Long employeeNumber);
 	public List<Employee> getEmployees();
+	public Employee searchEmployee(int numero, String email);
 }

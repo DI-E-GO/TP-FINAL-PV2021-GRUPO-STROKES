@@ -6,12 +6,15 @@
 </head>
 <body>
 	<div id="header" th:fragment="header">
-		<div class="d-none d-md-block bg-dark-green bg-gradient text-white text-center">
-			<img th:src="@{/image/logo-strokes.png}" class="img-fluid" alt="logo" style="width: 200px; height: 200px;">
+		<div
+			class="d-none d-md-block bg-dark-green bg-gradient text-white text-center">
+			<img th:src="@{/image/logo-strokes.png}" class="img-fluid" alt="logo"
+				style="width: 200px; height: 200px;">
 		</div>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark-green">
 			<div class="container p-3">
-				<a class="navbar-brand d-block d-sm-none" href="javascript: history.go(-1)"><i class="bi bi-arrow-left"></i></a>
+				<a class="navbar-brand d-block d-sm-none"
+					href="javascript: history.go(-1)"><i class="bi bi-arrow-left"></i></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarColor02"
 					aria-controls="navbarColor02" aria-expanded="false"
@@ -21,26 +24,43 @@
 
 				<div class="collapse navbar-collapse" id="navbarColor02">
 					<ul class="navbar-nav me-auto">
-						<li class="nav-item"><a class="nav-link" href="#">Noticias</a>
+						<li class="nav-item"><a class="nav-link" href="/public/index">Noticias</a>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="#">Sobre nosotros</a>
-						</li>
+						<li class="nav-item"><a class="nav-link" href="#">Sobre
+								nosotros</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">Contáctenos</a></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
 							href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/productline/nuevo"><i class="bi bi-save"></i> Crear - Linea de Producto</a> 
-								<a class="dropdown-item" href="/productline/lista"><i class="bi bi-view-list"></i> Listar - Linea de Producto</a> 
+								<a class="dropdown-item" href="/productline/nuevo"><i
+									class="bi bi-save"></i> Crear - Linea de Producto</a> <a
+									class="dropdown-item" href="/productline/lista"><i
+									class="bi bi-view-list"></i> Listar - Linea de Producto</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i class="bi bi-save"></i> Crear - Producto</a>
-								<a class="dropdown-item" href="#"><i class="bi bi-view-list"></i> Listar - Producto</a>
+								<a class="dropdown-item" href="#"><i class="bi bi-save"></i>
+									Crear - Producto</a> <a class="dropdown-item" href="#"><i
+									class="bi bi-view-list"></i> Listar - Producto</a>
 							</div></li>
 					</ul>
-					<div class="row mt-3">
+					<div th:if="${session.usuario!=null}" class="text-white mt-3 text-end">
+						<form th:action="@{/logout}" method="POST">
+<!-- 							<span>Bienvenido/a <span class="font-italic"
+								th:text="${session.usuario.username}"></span></span> -->
+							<button th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}+' - Cerrar Sesión'" type="submit" class="btn btn-outline-danger rounded-pill"></button>
+						</form>
+					</div>
+					<div th:if="${session.usuario==null}" class="row mt-3">
 						<div class="col text-end">
-							<button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#login" data-bs-whatever="Usuario">Usuario invitado <i class="bi bi-person-circle"></i></button>
- 						</div>
+							<button type="button" class="btn btn-outline-success rounded-pill"
+								data-bs-toggle="modal" data-bs-target="#login"
+								data-bs-whatever="Usuario">
+								Acceder <i class="bi bi-person-circle"></i>
+							</button>
+							<a type="button" class="btn btn-outline-warning rounded-pill" href="/auth/registro">
+								Registrarce
+							</a>
+						</div>
 					</div>
 					<!-- Modal -->
 					<div class="modal fade" id="login" tabindex="-1"
@@ -48,31 +68,35 @@
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header bg-success text-white">
-									<h5 class="modal-title" id="exampleModalLabel">Iniciar Sesion</h5>
+									<h5 class="modal-title" id="exampleModalLabel">Iniciar
+										Sesion</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<form>
-									<div class="row">
-										<div class="col-4 text-end mt-3">
-											<label for="recipient-name" class="col-form-label">Usuario:</label>
+									<form th:action="@{/auth/login-post}" method="POST">
+										<div class="row">
+											<div class="col-4 text-end mt-3">
+												<label for="recipient-name" class="col-form-label">Usuario:</label>
+											</div>
+											<div class="col-8 mt-3">
+												<input type="text" class="form-control rounded-pill"
+													name="username">
+											</div>
+											<div class="col-4 text-end mt-3">
+												<label for="recipient-name" class="col-form-label">Contraseña:</label>
+											</div>
+											<div class="col-8 mt-3">
+												<input type="password" class="form-control rounded-pill"
+													name="password">
+											</div>
+											<div class="text-center mt-3">
+											<a type="button" class="btn btn-secondary rounded-pill"
+												data-bs-dismiss="modal">Salir</a> <button type="submit"
+												class="btn btn-primary rounded-pill">Entrar</button>
+											</div>
 										</div>
-										<div class="col-8 mt-3">
-											<input type="text" class="form-control rounded-pill" id="user">
-										</div>
-										<div class="col-4 text-end mt-3">
-											<label for="recipient-name" class="col-form-label">Contraseña:</label>
-										</div>
-										<div class="col-8 mt-3">
-											<input type="password" class="form-control rounded-pill" id="password">
-										</div>
-									</div>
 									</form>
-								</div>
-								<div class="text-center mb-3">
-									<a type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Salir</a>
-									<a type="button" class="btn btn-primary rounded-pill">Entrar</a>
 								</div>
 							</div>
 						</div>
@@ -80,7 +104,7 @@
 				</div>
 			</div>
 		</nav>
-		
+
 	</div>
 </body>
 </html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout/head :: myhead">
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div th:if="${mensaje!=null}" class="alert alert-danger mb-3 alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong>
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Registro de Usuario</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/auth/registro}" th:object="${usuario}" method="POST">
+							<div class="row mb-3">
+								<label for="inputEmployeeNumber" class="col-sm-3 col-form-label fw-bold">Numero de Empleado</label>
+								<div class="col-sm-9">
+									<input type="number" id="inputEmployeeNumber" class="rounded-pill form-control" name="employeeNumber">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="inputEmployeeEmail" class="col-sm-3 col-form-label fw-bold">Correo del Empleado</label>
+								<div class="col-sm-9">
+									<input type="email" id="inputEmployeeEmail" class="rounded-pill form-control" name="email">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Nombre de Usuario</label>
+								<div class="col-sm-9">
+									<input type="text" id="inputUsername" class="rounded-pill form-control" th:field="*{username}">
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="inputPassword" class="col-sm-3 col-form-label fw-bold">Contraseña</label>
+								<div class="col-sm-9">
+									<input type="password" id="inputUPassword" class="rounded-pill form-control" th:field="*{password}">
+								</div>
+							</div>
+							<div class="pt-2 text-center">
+								<button type="reset"
+									class="btn btn-outline-danger rounded-pill">
+									Cancelar <i class="bi bi-x-circle-fill"></i>
+								</button>
+								<button type="submit"
+									class="btn btn-outline-success rounded-pill">
+									Guardar <i class="bi bi-check-circle-fill"></i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<aside th:insert="layout/advertising :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>
