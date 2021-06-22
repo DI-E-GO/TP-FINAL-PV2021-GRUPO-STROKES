@@ -8,10 +8,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -63,6 +65,8 @@ public class Employee {
 	@OneToMany(mappedBy = "salesRepEmployeeNumber",cascade = CascadeType.ALL)
 	private List<Customer> customer;
 	
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Usuario usuario;
 	/**
 	 * Constructores
 	 */
@@ -234,6 +238,20 @@ public class Employee {
 		this.customer = customer;
 	}
 	
+	/**
+	 * @return the usuario
+	 */
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	//Metodo toString
 	@Override
 	public String toString() {

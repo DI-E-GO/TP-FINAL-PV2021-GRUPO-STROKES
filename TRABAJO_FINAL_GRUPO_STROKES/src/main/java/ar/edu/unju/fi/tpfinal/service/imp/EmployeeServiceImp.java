@@ -56,4 +56,9 @@ public class EmployeeServiceImp implements IEmployeeService {
 		return employeeRepository.findAll();
 	}
 
+	@Override
+	public Employee searchEmployee(int numero, String email) {
+		return employeeRepository.findByEmployeeNumberAndEmailGreaterThanEqual(numero, email);
+	}
+
 }
