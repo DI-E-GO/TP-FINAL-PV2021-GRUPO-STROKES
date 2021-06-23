@@ -34,7 +34,7 @@ public class CustomerController {
 		this.employees = employeeService.getEmployees();
 		
 		model.addAttribute("customer", customerService.getCustomer());
-		model.addAttribute("customers", employees);
+		model.addAttribute("employees", employees);
 		
 		return "nuevocustomer";
 	}

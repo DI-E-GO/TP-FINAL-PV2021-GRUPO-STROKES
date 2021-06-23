@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import ar.edu.unju.fi.tpfinal.model.Product;
 import ar.edu.unju.fi.tpfinal.repository.IProductRepository;
@@ -54,6 +55,12 @@ public class ProductServiceImp implements IProductService {
 	public List<Product> getProducts() {
 		// TODO Auto-generated method stub
 		return productRepository.findAll();
+	}
+
+	@Override
+	public void addProductCode(MultipartFile file, Product product) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

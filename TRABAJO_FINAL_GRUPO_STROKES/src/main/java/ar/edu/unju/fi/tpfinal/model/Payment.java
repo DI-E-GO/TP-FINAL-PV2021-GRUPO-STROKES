@@ -3,7 +3,6 @@
  */
 package ar.edu.unju.fi.tpfinal.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,12 +26,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "PAYMENTS")
-public class Payment implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Payment{
 
 	//Atributos
 	

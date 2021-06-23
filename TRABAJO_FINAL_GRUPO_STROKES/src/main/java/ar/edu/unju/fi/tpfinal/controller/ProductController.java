@@ -43,9 +43,10 @@ public class ProductController {
 	public ModelAndView saveNewProduct(Model model, @ModelAttribute(name = "product") Product product) {
 		
 		ModelAndView modelView = new ModelAndView("nuevoproduct");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+product.getProductName()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("product", productService.getProduct());
 		productService.addProduct(product);
-		
 		return modelView;
 	}
 	
@@ -60,10 +61,11 @@ public class ProductController {
 	
 	@GetMapping("/producto/editar/{product}")
 	public ModelAndView editproduct(@PathVariable String product, Model model) {
-		
+		this.productLines = productLineService.getProductLines();
 		ModelAndView modelView = new ModelAndView("nuevoproduct");
 		Optional<Product> prod = productService.getProduct(product);
 		model.addAttribute("product", prod);
+		modelView.addObject("productLines", productLines);
 		
 		return modelView;
 	}

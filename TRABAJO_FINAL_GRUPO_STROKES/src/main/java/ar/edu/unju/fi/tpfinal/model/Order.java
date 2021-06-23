@@ -42,9 +42,7 @@ public class Order {
 	@ManyToOne()
 	@JoinColumn(name = "customer_number_id")
 	private Customer customerNumber;
-	
-	//@OneToOne(mappedBy = "orderNumber", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-	//private OrderDetail orderDetail;
+
 	
 	public Order() {
 		// TODO Auto-generated constructor stub

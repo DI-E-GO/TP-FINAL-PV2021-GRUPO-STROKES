@@ -33,7 +33,7 @@ public class PaymentController {
 	public String getPaymentFormPage(Model model) {
 		this.customers = customerService.getCustomers();
 		model.addAttribute("payment", paymentService.getPayment());
-		model.addAttribute("customer", customers);
+		model.addAttribute("customers", customers);
 		return "nuevopayment";
 	}
 	
@@ -41,6 +41,8 @@ public class PaymentController {
 	public ModelAndView saveNewPayment(Model model, @ModelAttribute(name = "payment") Payment payment) {
 		
 		ModelAndView modelView = new ModelAndView("nuevopayment");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+payment.getCheckNumber()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("payment", paymentService.getPayment());
 		paymentService.addPayment(payment);
 		
@@ -56,17 +58,18 @@ public class PaymentController {
 		return "listapayment";
 	}
 	
-	@GetMapping("/pagos/editar/{payment}")
+	@GetMapping("/pago/editar/{payment}")
 	public ModelAndView editPayment(@PathVariable String payment, Model model) {
-		
+		this.customers = customerService.getCustomers();
 		ModelAndView modelView = new ModelAndView("nuevopayment");
 		Optional<Payment> pago = paymentService.getPayment(payment);
 		model.addAttribute("payment", pago);
+		modelView.addObject("customers", customers);
 		
 		return modelView;
 	}
 	
-	@GetMapping("/pagos/borrar/{payment}")
+	@GetMapping("/pago/borrar/{payment}")
 	public String deletePayment(@PathVariable String payment, Model model) {
 		
 		paymentService.deletePayment(payment);

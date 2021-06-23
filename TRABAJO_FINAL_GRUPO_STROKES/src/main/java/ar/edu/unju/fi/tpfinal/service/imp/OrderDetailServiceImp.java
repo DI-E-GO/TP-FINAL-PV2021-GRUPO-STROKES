@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpfinal.model.OrderDetail;
 import ar.edu.unju.fi.tpfinal.repository.IOrderDetailRepository;
@@ -16,6 +17,7 @@ import ar.edu.unju.fi.tpfinal.service.IOrderDetailService;
  * @author Diego
  *
  */
+@Service
 public class OrderDetailServiceImp implements IOrderDetailService {
 	@Autowired
 	IOrderDetailRepository orderDetailRepository;

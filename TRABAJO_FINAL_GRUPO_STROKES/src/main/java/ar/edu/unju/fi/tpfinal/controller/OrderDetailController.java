@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Order;
@@ -46,13 +48,15 @@ public class OrderDetailController {
 		model.addAttribute("products", products);
 		model.addAttribute("orders", orders);
 		
-		return "neworderservice";
+		return "neworderdetail";
 	}
 	
 	@PostMapping("/detalle/guardar")
-	public ModelAndView saveNewOrderDetail(Model model, @ModelAttribute(name = "orderDetail") OrderDetail orderDetail) {
+	public ModelAndView saveNewOrderDetail(Model model,@RequestParam("file") MultipartFile file, @ModelAttribute(name = "orderDetail") OrderDetail orderDetail) {
 		
 		ModelAndView modelView = new ModelAndView("neworderservice"); 
+		String mensaje="Objeto guardado en la base de datos correctamente, "+orderDetail.getOrderLineNumber()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("orderDetail", orderDetailService.getOrderDetail());
 		orderDetailService.addOrderDetail(orderDetail);
 		

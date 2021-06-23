@@ -32,6 +32,8 @@ public class OfficeController {
 	public ModelAndView saveNewOffice(Model model , @ModelAttribute(name = "office") Office office) {
 		
 		ModelAndView modelView = new ModelAndView("nuevaoffice");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+office.getOfficeCode()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("office", officeService.getOffice());
 		officeService.addOffice(office);
 		
@@ -57,7 +59,7 @@ public class OfficeController {
 		return modelView;
 	}
 	
-	@GetMapping("/oficina/borrar/{office}")
+	@GetMapping("/oficina/borrar/{officeCode}")
 	public String deleteOffice(@PathVariable String office, Model model) {
 		
 		officeService.deleteOffice(office);

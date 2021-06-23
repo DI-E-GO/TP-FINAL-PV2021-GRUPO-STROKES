@@ -33,7 +33,7 @@ public class EmployeeController {
 	public String getEmployeeFormPage(Model model) {
 		
 		this.offices = officeService.getOffices();
-		model.addAttribute("employees", employeeService.getEmployee());
+		model.addAttribute("employee", employeeService.getEmployee());
 		model.addAttribute("offices", offices);
 		
 		return "nuevoemployee";
