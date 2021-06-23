@@ -29,7 +29,7 @@ public class EmployeeController {
 	
 	List<Office> offices = new ArrayList<Office>();
 	
-	@GetMapping("/empleados/nuevo")
+	@GetMapping("/empleado/nuevo")
 	public String getEmployeeFormPage(Model model) {
 		
 		this.offices = officeService.getOffices();
@@ -43,6 +43,8 @@ public class EmployeeController {
 	public ModelAndView saveNewEmployee(Model model, @ModelAttribute(name = "employee") Employee employee) {
 		
 		ModelAndView modelView = new ModelAndView("nuevoemployee");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+employee.getFirstName()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("employee", employeeService.getEmployee());
 		employeeService.addEmployee(employee);
 		
@@ -60,10 +62,11 @@ public class EmployeeController {
 
 	@GetMapping("/empleado/editar/{employee}")
 	public ModelAndView editEmployee(@PathVariable Long employee, Model model) {
-		
+		this.offices = officeService.getOffices();
 		ModelAndView modelView = new ModelAndView("nuevoemployee");
 		Optional<Employee> empleado = employeeService.getEmployee(employee);
 		model.addAttribute("employee", empleado);
+		modelView.addObject("offices", offices);
 		
 		return modelView;
 	}

@@ -7,7 +7,11 @@
 </head>
 <body>
 	<div th:insert="layout/header :: header"></div>
-	
+	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/empleado/lista"> Ver tabla</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
@@ -58,8 +62,8 @@
 							<div class="row mb-3">
 								<label for="report" class="col-sm-3 col-form-label fw-bold">Informar a</label>
 							    <div class="col-sm-9">
-							    	<select class="form-select rounded-pill" id="report" th:field="*{oneEmployee}">
-										<option th:each="nemployee : ${employee}" th:value="${nemployee.employeeNumber}" th:text="${nemployee.employeeNumber}"></option>
+							    	<select class="form-select rounded-pill" id="report" th:field="*{reportsTo}">
+										<option th:each="nemployee : ${employees}" th:value="${nemployee.reportsTo}" th:text="${nemployee.employeeNumber}"></option>
 									</select>
 							    </div>
 							</div>
