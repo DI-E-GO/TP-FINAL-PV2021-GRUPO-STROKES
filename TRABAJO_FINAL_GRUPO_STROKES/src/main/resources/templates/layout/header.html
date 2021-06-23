@@ -45,19 +45,18 @@
 					</ul>
 					<div th:if="${session.usuario!=null}" class="text-white mt-3 text-end">
 						<form th:action="@{/logout}" method="POST">
-<!-- 							<span>Bienvenido/a <span class="font-italic"
-								th:text="${session.usuario.username}"></span></span> -->
-							<button th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}+' - Cerrar Sesión'" type="submit" class="btn btn-outline-danger rounded-pill"></button>
+							<span>Bienvenido/a <span class="fst-italic badge bg-success text-wrap" th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}"></span></span>
+							<button th:text="${session.usuario.username}+' - Cerrar Sesión'" type="submit" class="btn btn-sm btn-outline-danger rounded-pill"></button>
 						</form>
 					</div>
 					<div th:if="${session.usuario==null}" class="row mt-3">
 						<div class="col text-end">
-							<button type="button" class="btn btn-outline-success rounded-pill"
+							<button type="button" class="btn btn-sm btn-outline-success rounded-pill"
 								data-bs-toggle="modal" data-bs-target="#login"
 								data-bs-whatever="Usuario">
 								Acceder <i class="bi bi-person-circle"></i>
 							</button>
-							<a type="button" class="btn btn-outline-warning rounded-pill" href="/auth/registro">
+							<a type="button" class="btn btn-sm btn-outline-warning rounded-pill" href="/auth/registro">
 								Registrarce
 							</a>
 						</div>
