@@ -25,7 +25,12 @@ public class UserDetailsServiceImp implements UserDetailsService{
 			builder=User.withUsername(username);
 			builder.disabled(false);
 			builder.password(usuario.getPassword());
-			builder.authorities(new SimpleGrantedAuthority("ROLE_USER"));
+			if(usuario.getRol().contains("Sales Rep")) {
+				builder.authorities(new SimpleGrantedAuthority("ROLE_USER"));
+			}else {
+				builder.authorities(new SimpleGrantedAuthority("ROLE_ADMIN"));
+			}
+			
 		} else {
 			throw new UsernameNotFoundException("Usuario NO encontrado");
 		}
