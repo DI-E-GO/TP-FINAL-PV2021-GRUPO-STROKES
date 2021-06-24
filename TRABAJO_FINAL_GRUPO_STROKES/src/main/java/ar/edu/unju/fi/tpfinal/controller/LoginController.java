@@ -44,6 +44,7 @@ public class LoginController {
 			model.addAttribute("mensaje", mensajeError);
 			return "registro";
 		} else {
+			unUsuario.setRol(employee.getJobTitle());
 			unUsuario.setEmployee(employee);
 			model.addAttribute("usuario", usuarioService.registrar(unUsuario));
 		}

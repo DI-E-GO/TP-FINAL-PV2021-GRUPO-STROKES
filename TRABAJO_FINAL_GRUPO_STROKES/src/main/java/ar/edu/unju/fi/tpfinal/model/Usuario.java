@@ -33,6 +33,7 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "employee_id")
     @OneToOne(fetch = FetchType.LAZY)	
 	private Employee employee;
+	private String rol;
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
@@ -42,12 +43,13 @@ public class Usuario implements Serializable {
 	 * @param username
 	 * @param password
 	 */
-	public Usuario(Long id, String username, String password, Employee employee) {
+	public Usuario(Long id, String username, String password, Employee employee, String rol) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.employee = employee;
+		this.rol = rol;
 	}
 
 	/**
@@ -105,6 +107,20 @@ public class Usuario implements Serializable {
 	 */
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	/**
+	 * @return the rol
+	 */
+	public String getRol() {
+		return rol;
+	}
+
+	/**
+	 * @param rol the rol to set
+	 */
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	@Override
