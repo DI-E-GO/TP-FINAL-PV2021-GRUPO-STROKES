@@ -63,7 +63,7 @@
 								<label for="report" class="col-sm-3 col-form-label fw-bold">Informar a</label>
 							    <div class="col-sm-9">
 							    	<select class="form-select rounded-pill" id="report" th:field="*{reportsTo}">
-										<option th:each="nemployee : ${employees}" th:value="${nemployee.reportsTo}" th:text="${nemployee.employeeNumber}"></option>
+										<option th:each="nemployee : ${employees}" th:value="${nemployee.reportsTo}" th:text="${nemployee.reportsTo}"></option>
 									</select>
 							    </div>
 							</div>
