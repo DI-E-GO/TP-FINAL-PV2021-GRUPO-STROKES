@@ -40,11 +40,13 @@ public class OrderController {
 	
 	@PostMapping("/compra/guardar")
 	public ModelAndView saveNewOrder(Model model, @ModelAttribute(name = "order") Order order) {
-		
+		this.customers = customerService.getCustomers();
 		ModelAndView modelView = new ModelAndView("nuevaorder");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+order.getOrderNumber()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("order", orderService.getOrder());
 		orderService.addOrder(order);
-		
+		modelView.addObject("customers", customers);
 		return modelView;
 	}
 	
@@ -57,32 +59,32 @@ public class OrderController {
 		return "listaorder";
 	}
 	
-	@GetMapping("/compra/editar/{order}")
-	public ModelAndView editOrder(@PathVariable Long order, Model model) {
-		
+	@GetMapping("/compra/editar/{orderNumber}")
+	public ModelAndView editOrder(@PathVariable Long orderNumber, Model model) {
+		this.customers = customerService.getCustomers();
 		ModelAndView modelView = new ModelAndView("nuevaorder");
-		Optional<Order> compra = orderService.getOrder(order);
+		Optional<Order> compra = orderService.getOrder(orderNumber);
 		model.addAttribute("order", compra);
-		
+		modelView.addObject("customers", customers);
 		return modelView;
 	}
 	
-	@GetMapping("/compra/borrar/{order}")
-	public String deleteOrder(@PathVariable Long order, Model model) {
+	@GetMapping("/compra/borrar/{orderNumber}")
+	public String deleteOrder(@PathVariable Long orderNumber, Model model) {
 		
-		orderService.deleteOrder(order);
+		orderService.deleteOrder(orderNumber);
 		
 		return "redirect:/compra/lista";
 	}
 	
-	@GetMapping("/compra/seleccionar/{order}")
-	public String selectOrder(@PathVariable Long order, Model model) {
+	@GetMapping("/compra/seleccionar/{orderNumber}")
+	public String selectOrder(@PathVariable Long orderNumber, Model model) {
 		
-		Optional<Order> compra = orderService.getOrder(order);
+		Optional<Order> compra = orderService.getOrder(orderNumber);
 		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: " + compra.get().getOrderNumber()+ " ";                        
 		model.addAttribute("order", compra);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
-		model.addAttribute("orders", orderService.getOrder(order));
+		model.addAttribute("orders", orderService.getOrder());
 		
 		return "listaorder";
 	}

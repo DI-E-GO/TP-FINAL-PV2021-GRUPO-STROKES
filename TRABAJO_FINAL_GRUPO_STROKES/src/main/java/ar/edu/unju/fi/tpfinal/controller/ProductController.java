@@ -41,12 +41,13 @@ public class ProductController {
 	
 	@PostMapping("/producto/guardar")
 	public ModelAndView saveNewProduct(Model model, @ModelAttribute(name = "product") Product product) {
-		
+		this.productLines = productLineService.getProductLines();
 		ModelAndView modelView = new ModelAndView("nuevoproduct");
 		String mensaje="Objeto guardado en la base de datos correctamente, "+product.getProductName()+": ";
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("product", productService.getProduct());
 		productService.addProduct(product);
+		modelView.addObject("productLines", productLines);
 		return modelView;
 	}
 	
@@ -59,29 +60,29 @@ public class ProductController {
 		return "listaproduct";
 	}
 	
-	@GetMapping("/producto/editar/{product}")
-	public ModelAndView editproduct(@PathVariable String product, Model model) {
+	@GetMapping("/producto/editar/{productCode}")
+	public ModelAndView editproduct(@PathVariable String productCode, Model model) {
 		this.productLines = productLineService.getProductLines();
 		ModelAndView modelView = new ModelAndView("nuevoproduct");
-		Optional<Product> prod = productService.getProduct(product);
+		Optional<Product> prod = productService.getProduct(productCode);
 		model.addAttribute("product", prod);
 		modelView.addObject("productLines", productLines);
 		
 		return modelView;
 	}
 	
-	@GetMapping("/producto/borrar/{product}")
-	public String deleteProduct(@PathVariable String product, Model model) {
+	@GetMapping("/producto/borrar/{productCode}")
+	public String deleteProduct(@PathVariable String productCode, Model model) {
 		
-		productService.deleteProduct(product);
+		productService.deleteProduct(productCode);
 		
 		return "redirect:/producto/lista";
 	}
 	
-	@GetMapping("/producto/seleccionar/{product}")
-	public String selectProduct(@PathVariable String product, Model model) {
+	@GetMapping("/producto/seleccionar/{productCode}")
+	public String selectProduct(@PathVariable String productCode, Model model) {
 		
-		Optional<Product> prod = productService.getProduct(product);
+		Optional<Product> prod = productService.getProduct(productCode);
 		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: " + prod.get().getProductCode()+ " ";                        
 		model.addAttribute("product", prod);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);

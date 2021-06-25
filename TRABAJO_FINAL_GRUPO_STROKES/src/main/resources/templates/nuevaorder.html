@@ -7,7 +7,11 @@
 </head>
 <body>
 	<div th:insert="layout/header :: header"></div>
-	
+	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/compra/lista"> Ver tabla</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">

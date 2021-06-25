@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout/head :: myhead">
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div th:if="${mensajeBorrar!=null}" class="alert alert-danger alert-dismissible fade show" role="alert">
+		<strong th:text="${mensajeBorrar}"></strong><a class="alert-link" th:href="@{/cliente/borrar/}+${customerNumber}">Continuar</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<div class="container">
+		<div class="row">
+		<div class="border rounded-pill mt-3 pb-3 bg-dark-green text-white">
+			<h3 class="text-center mt-3">Listado de Clientes</h3>
+		</div>
+			<div class="mt-3 col-md-12">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th scope="col">N° de Cliente</th>
+								<th scope="col">Nombre de su negocio</th>
+								<th scope="col">Apellido</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Telefono</th>
+								<th scope="col">Direccion</th>
+								<th scope="col">Direccion Secundaria</th>
+								<th scope="col">Provincia</th>
+								<th scope="col">Localidad</th>
+								<th scope="col">Codigo Postal</th>
+								<th scope="col">Pais</th>
+								<th scope="col">Cod. Vendedor</th>
+								<th scope="col">Limite de Credito</th>
+								<th scope="col">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cli:${customers}">
+								<td th:text="${cli.customerNumber}"></td>
+								<td th:text="${cli.customerName}"></td>
+								<td th:text="${cli.contactLastName}"></td>
+								<td th:text="${cli.contactFirstName}"></td>
+								<td th:text="${cli.phone}"></td>
+								<td th:text="${cli.addressLine1}"></td>
+								<td th:text="${cli.addressLine2}"></td>
+								<td th:text="${cli.city}"></td>
+								<td th:text="${cli.state}"></td>
+								<td th:text="${cli.postalCode}"></td>
+								<td th:text="${cli.country}"></td>
+								<td th:text="${cli.employee.employeeNumber}"></td>
+								<td th:text="${cli.creditLimit}"></td>
+								<td class="text-center">
+									<div class="btn-group btn-group-sm" role="group">
+										<a th:href="@{/cliente/editar/}+${cli.customerNumber}" type="button" class="btn btn-warning">
+											<i class="bi bi-pencil-fill"></i>
+										</a>
+										<a th:href="@{/cliente/seleccionar/}+${cli.customerNumber}" type="button" class="btn btn-danger">
+											<i class="bi bi-trash2-fill"></i>
+										</a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

@@ -34,7 +34,7 @@ public class Customer {
 	
 	@Id
 	@Column(name = "customer_number_id")
-	private int customerNumber;
+	private Long customerNumber;
 	
 	@Column(name = "customer_name")
 	private String customerName;
@@ -99,7 +99,7 @@ public class Customer {
 	 * @param country
 	 * @param creditLimit
 	 */
-	public Customer(int customerNumber, String customerName, String contactLastName, String contactFirstName,
+	public Customer(Long customerNumber, String customerName, String contactLastName, String contactFirstName,
 			String phone, String addressLine1, String addressLine2, String city, String state, String postalCode,
 			String country, Double creditLimit) {
 		super();
@@ -122,13 +122,13 @@ public class Customer {
 	/**
 	 * @return the customerNumber
 	 */
-	public int getCustomerNumber() {
+	public Long getCustomerNumber() {
 		return customerNumber;
 	}
 	/**
 	 * @param customerNumber the customerNumber to set
 	 */
-	public void setCustomerNumber(int customerNumber) {
+	public void setCustomerNumber(Long customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 	/**

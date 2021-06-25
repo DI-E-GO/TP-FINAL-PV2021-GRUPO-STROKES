@@ -9,5 +9,5 @@ import ar.edu.unju.fi.tpfinal.model.Payment;
 
 public interface IPaymentRepository extends CrudRepository<Payment, String>{
 	public List<Payment> findAll();
-	public Optional<Payment> findByCheckNumber(String checkNumber);
+	public Optional<Payment> findBycheckNumber(String checkNumber);
 }

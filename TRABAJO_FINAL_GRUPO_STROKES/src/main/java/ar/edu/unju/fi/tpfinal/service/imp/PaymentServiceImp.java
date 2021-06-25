@@ -33,7 +33,7 @@ public class PaymentServiceImp implements IPaymentService {
 	}
 
 	@Override
-	public void addPayment(Payment customer) {
+	public void addPayment(Payment payment) {
 		// TODO Auto-generated method stub
 		paymentRepository.save(payment);
 	}

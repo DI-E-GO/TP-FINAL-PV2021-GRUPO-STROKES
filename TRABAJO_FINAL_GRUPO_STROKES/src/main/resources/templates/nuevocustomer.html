@@ -7,7 +7,11 @@
 </head>
 <body>
 	<div th:insert="layout/header :: header"></div>
-	
+	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/cliente/lista"> Ver tabla</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
@@ -87,7 +91,7 @@
 								<label for="codvend" class="col-sm-3 col-form-label fw-bold">Codigo de vendedor</label>
 							    <div class="col-sm-9">
 							    	<select class="form-select rounded-pill" id="codvend" th:field="*{employee.employeeNumber}">
-										<option th:each="codVend : ${employees}" th:value="${codVend.employeeNumber}" th:text="${codVend.firstName}"></option>
+										<option th:each="codVend : ${employees}" th:value="${codVend.employeeNumber}" th:text="${codVend.employeeNumber}"></option>
 									</select>
 							    </div>
 							</div>

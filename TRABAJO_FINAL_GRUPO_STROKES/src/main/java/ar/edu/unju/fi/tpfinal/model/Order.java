@@ -19,7 +19,7 @@ public class Order {
 	
 	@Id
 	@Column(name = "order_number")
-	private int orderNumber;
+	private Long orderNumber;
 	
 	@Column(name = "order_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -56,7 +56,7 @@ public class Order {
 	 * @param status
 	 * @param comments
 	 */
-	public Order(int orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String status,
+	public Order(Long orderNumber, LocalDate orderDate, LocalDate requiredDate, LocalDate shippedDate, String status,
 			String comments) {
 		super();
 		this.orderNumber = orderNumber;
@@ -70,14 +70,14 @@ public class Order {
 	/**
 	 * @return the orderNumber
 	 */
-	public int getOrderNumber() {
+	public Long getOrderNumber() {
 		return orderNumber;
 	}
 
 	/**
 	 * @param orderNumber the orderNumber to set
 	 */
-	public void setOrderNumber(int orderNumber) {
+	public void setOrderNumber(Long orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
@@ -165,20 +165,6 @@ public class Order {
 		this.customerNumber = customer;
 	}
 
-	/**
-	 * @return the orderDetail
-	
-	public OrderDetail getOrderDetail() {
-		return orderDetail;
-	}
-
-	/**
-	 * @param orderDetail the orderDetail to set
-
-	public void setOrderDetail(OrderDetail orderDetail) {
-		this.orderDetail = orderDetail;
-	}
- */
 	@Override
 	public String toString() {
 		return "Order [orderNumber=" + orderNumber + ", orderDate=" + orderDate + ", requiredDate=" + requiredDate

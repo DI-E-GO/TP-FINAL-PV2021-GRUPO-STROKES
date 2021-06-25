@@ -29,10 +29,9 @@ import org.springframework.stereotype.Component;
 public class Payment{
 
 	//Atributos
-	
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_number_id")
+	@JoinColumn(name = "customer_number")
 	private Customer customerNumber;
 	
 	@Id
