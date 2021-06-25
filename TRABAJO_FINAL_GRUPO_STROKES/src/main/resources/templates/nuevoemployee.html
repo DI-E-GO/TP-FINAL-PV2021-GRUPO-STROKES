@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:insert="layout/head :: myhead">
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/empleado/lista"> Ver tabla</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Registro de Empleados</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/empleado/guardar}" th:object="${employee}" method="POST">
+							<div class="row mb-3">
+								<label for="nemployee" class="col-sm-3 col-form-label fw-bold">Número de Empleado</label>
+							    <div class="col-sm-9">
+							      <input type="number" class="form-control rounded-pill" th:field="*{employeeNumber}" id="nemployee" placeholder="Ingrese numero de empleado" title="Ingrese numero de empleado">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="apellido" class="col-sm-3 col-form-label fw-bold">Apellido</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{lastName}" id="apellido" title="Ingrese su apellido" placeholder="Ingrese su apellido">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="name" class="col-sm-3 col-form-label fw-bold">Nombre</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{firstName}" id="name" placeholder="Ingrese su nombre" title="Ingrese su nombre">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="extension" class="col-sm-3 col-form-label fw-bold">Extension</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{extension}" id="extension" title="Ingrese extencion" placeholder="Ingrese extencion">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="email" class="col-sm-3 col-form-label fw-bold">Email</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{email}" id="email" placeholder="Ingrese su Email" title="Ingrese su Email">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="coffice" class="col-sm-3 col-form-label fw-bold">Codigo de Oficina</label>
+							    <div class="col-sm-9">
+							    	<select class="form-select rounded-pill" id="coffice" th:field="*{officeCode.officeCode}">
+										<option th:each="cOffice : ${offices}" th:value="${cOffice.officeCode}" th:text="${cOffice.officeCode}"></option>
+									</select>
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="report" class="col-sm-3 col-form-label fw-bold">Informar a</label>
+							    <div class="col-sm-9">
+							    	<select class="form-select rounded-pill" id="report" th:field="*{reportsTo}">
+										<option th:each="nemployee : ${employees}" th:value="${nemployee.reportsTo}" th:text="${nemployee.reportsTo}"></option>
+									</select>
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="cargo" class="col-sm-3 col-form-label fw-bold">Cargo</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{jobTitle}" id="cargo" placeholder="Ingrese cargo que ocupa" title="Ingrese cargo que ocupa">
+							    </div>
+							</div>
+							 <div class="pt-2 text-center">
+							 	 <button type="reset"
+									class="btn btn-outline-danger rounded-pill">
+									Cancelar <i class="bi bi-x-circle-fill"></i>
+								</button>
+								<button type="submit"
+									class="btn btn-outline-success rounded-pill">
+									Guardar <i class="bi bi-check-circle-fill"></i>
+								</button>
+							 </div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<aside th:insert="layout/advertising :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

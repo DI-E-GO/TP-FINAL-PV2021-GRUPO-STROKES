@@ -8,7 +8,7 @@
 <body>
 	<div th:insert="layout/header :: header"></div>
 	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
-		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/cliente/lista"> Ver tabla</a>
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/oficina/lista"> Ver tabla</a>
 		<button type="button" class="btn-close" data-bs-dismiss="alert"
 			aria-label="Close"></button>
 	</div>
@@ -17,32 +17,20 @@
 			<div class="col-md-9">
 				<div class="card mt-4 mb-5 shadow-lg">
 					<div class="card-header text-center text-white">
-						<h2>Registro de Clientes</h2>
+						<h2>Registro de Oficinas</h2>
 					</div>
 					<div class="card-body">
-						<form th:action="@{/cliente/guardar}" th:object="${customer}" method="POST">
+						<form th:action="@{/oficina/guardar}" th:object="${office}" method="POST">
 							<div class="row mb-3">
-								<label for="numCliente" class="col-sm-3 col-form-label fw-bold">N° de Cliente</label>
+								<label for="codof" class="col-sm-3 col-form-label fw-bold">Codigo de Oficina</label>
 							    <div class="col-sm-9">
-							      <input type="number" class="form-control rounded-pill" th:field="*{customerNumber}" id="numCliente" title="Ingrese numero de cliente">
+							      <input type="text" class="form-control rounded-pill" th:field="*{officeCode}" id="codof" placeholder="Ingrese codigo de oficina" title="Ingrese codigo de oficina">
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="nameCliente" class="col-sm-3 col-form-label fw-bold">Nombre de su Negocio</label>
+								<label for="city" class="col-sm-3 col-form-label fw-bold">Provincia</label>
 							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{customerName}" id="nameCliente" title="Ingrese el nombre de su negocio">
-							    </div>
-							</div>
-							<div class="row mb-3">
-								<label for="apellidoCliente" class="col-sm-3 col-form-label fw-bold">Apellido</label>
-							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{contactLastName}" id="apellidoCliente" placeholder="Ingrese su apellido" title="Ingrese su apellido">
-							    </div>
-							</div>
-							<div class="row mb-3">
-								<label for="nombreCliente" class="col-sm-3 col-form-label fw-bold">Nombre</label>
-							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{contactFirstName}" id="nombreCliente" placeholder="Ingrese su nombre" title="Ingrese su nombre">
+							      <input type="text" class="form-control rounded-pill" th:field="*{city}" id="city" placeholder="Ingrese Provincia" title="Ingrese Provincia">
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -54,7 +42,7 @@
 							<div class="row mb-3">
 								<label for="direccion" class="col-sm-3 col-form-label fw-bold">Direccion</label>
 							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{addressLine1}" id="direccion" placeholder="Ingrese su direccion" title="Ingrese su direccion">
+							      <input type="text" class="form-control rounded-pill" th:field="*{addressLine1}" id="direccion" placeholder="Ingrese direccion" title="Ingrese su direccion">
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -64,21 +52,9 @@
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="provincia" class="col-sm-3 col-form-label fw-bold">Provincia</label>
-							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{city}" id="provincia" placeholder="Ingrese Provincia de residencia" title="Ingrese provincia de residencia">
-							    </div>
-							</div>
-							<div class="row mb-3">
 								<label for="estado" class="col-sm-3 col-form-label fw-bold">Localidad/Ciudad</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{state}" id="estado" placeholder="Ingrese ciudad de residencia" title="Ingrese ciudad de residencia">
-							    </div>
-							</div>
-							<div class="row mb-3">
-								<label for="codpostal" class="col-sm-3 col-form-label fw-bold">Codigo Postal</label>
-							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{postalCode}" id="codpostal" placeholder="Ingrese codigo postal" title="Ingrese codigo postal">
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -88,17 +64,15 @@
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="codvend" class="col-sm-3 col-form-label fw-bold">Codigo de vendedor</label>
+								<label for="codpostal" class="col-sm-3 col-form-label fw-bold">Codigo Postal</label>
 							    <div class="col-sm-9">
-							    	<select class="form-select rounded-pill" id="codvend" th:field="*{employee.employeeNumber}">
-										<option th:each="codVend : ${employees}" th:value="${codVend.employeeNumber}" th:text="${codVend.employeeNumber}"></option>
-									</select>
+							      <input type="text" class="form-control rounded-pill" th:field="*{postalCode}" id="codpostal" placeholder="Ingrese codigo postal" title="Ingrese codigo postal">
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="limiteCred" class="col-sm-3 col-form-label fw-bold">Limite de Credito</label>
+								<label for="territory" class="col-sm-3 col-form-label fw-bold">Barrio</label>
 							    <div class="col-sm-9">
-							      <input type="number" class="form-control rounded-pill" th:field="*{creditLimit}" id="limiteCred" placeholder="Ingrese su limite de credito" title="Ingrese su limite de credito">
+							      <input type="text" class="form-control rounded-pill" th:field="*{territory}" id="territory" placeholder="Ingrese Barrio" title="Ingrese Barrio">
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">

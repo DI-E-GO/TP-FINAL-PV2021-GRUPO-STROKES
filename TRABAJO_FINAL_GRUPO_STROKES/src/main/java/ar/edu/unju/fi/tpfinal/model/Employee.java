@@ -34,7 +34,7 @@ public class Employee {
 	
 	@Id
 	@Column(name = "employee_number_id")
-	private int employeeNumber;
+	private Long employeeNumber;
 	
 	@Column(name = "last_name")
 	private String lastName;
@@ -83,7 +83,7 @@ public class Employee {
 	 * @param email
 	 * @param jobTitle
 	 */
-	public Employee(int employeeNumber, String lastName, String firstName, String extension, String email,
+	public Employee(Long employeeNumber, String lastName, String firstName, String extension, String email,
 			String jobTitle) {
 		super();
 		this.employeeNumber = employeeNumber;
@@ -101,14 +101,14 @@ public class Employee {
 	/**
 	 * @return the employeeNumber
 	 */
-	public int getEmployeeNumber() {
+	public Long getEmployeeNumber() {
 		return employeeNumber;
 	}
 
 	/**
 	 * @param employeeNumber the employeeNumber to set
 	 */
-	public void setEmployeeNumber(int employeeNumber) {
+	public void setEmployeeNumber(Long employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
 

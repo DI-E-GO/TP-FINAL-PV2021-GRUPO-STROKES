@@ -34,18 +34,20 @@ public class CustomerController {
 		this.employees = employeeService.getEmployees();
 		
 		model.addAttribute("customer", customerService.getCustomer());
-		model.addAttribute("customers", employees);
+		model.addAttribute("employees", employees);
 		
 		return "nuevocustomer";
 	}
 	
 	@PostMapping("/cliente/guardar")
 	public ModelAndView saveNewCustomer(Model model, @ModelAttribute(name = "customer") Customer customer) {
-		
+		this.employees = employeeService.getEmployees();
 		ModelAndView modelView = new ModelAndView("nuevoCustomer");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+customer.getCustomerName()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("customer", customerService.getCustomer());
 		customerService.addCustomer(customer);
-		
+		modelView.addObject("employees", employees);
 		return modelView;
 	}
 	
@@ -58,28 +60,28 @@ public class CustomerController {
 		return modelView;
 	}
 	
-	@GetMapping("/cliente/editar/{customer}")
-	public ModelAndView editCustomer(@PathVariable Long customer, Model model) {
-		
+	@GetMapping("/cliente/editar/{customerNumber}")
+	public ModelAndView editCustomer(@PathVariable Long customerNumber, Model model) {
+		this.employees = employeeService.getEmployees();
 		ModelAndView modelView = new ModelAndView("nuevocustomer");
-		Optional<Customer> cliente = customerService.getCustomer(customer);
+		Optional<Customer> cliente = customerService.getCustomer(customerNumber);
 		model.addAttribute("customer", cliente);
-		
+		modelView.addObject("employees", employees);
 		return modelView;
 	}
 	
-	@GetMapping("/cliente/borrar/{customer}")
-	public String deleteCustomer(@PathVariable Long customer, Model model) {
+	@GetMapping("/cliente/borrar/{customerNumber}")
+	public String deleteCustomer(@PathVariable Long customerNumber, Model model) {
 		
-		customerService.deleteCustomer(customer);
+		customerService.deleteCustomer(customerNumber);
 		
 		return "redirect:/cliente/lista";
 	}
 	
-	@GetMapping("/cliente/seleccionar/{customer}")
-	public String selectCustomer(@PathVariable Long customer, Model model) {
+	@GetMapping("/cliente/seleccionar/{customerNumber}")
+	public String selectCustomer(@PathVariable Long customerNumber, Model model) {
 		
-		Optional<Customer> cliente = customerService.getCustomer(customer);
+		Optional<Customer> cliente = customerService.getCustomer(customerNumber);
 		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: " + cliente.get().getCustomerNumber()+ " ";                        
 		model.addAttribute("customer", cliente);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);

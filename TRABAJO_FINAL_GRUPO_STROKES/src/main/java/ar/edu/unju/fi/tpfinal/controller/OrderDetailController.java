@@ -46,15 +46,20 @@ public class OrderDetailController {
 		model.addAttribute("products", products);
 		model.addAttribute("orders", orders);
 		
-		return "neworderservice";
+		return "neworderdetail";
 	}
 	
 	@PostMapping("/detalle/guardar")
 	public ModelAndView saveNewOrderDetail(Model model, @ModelAttribute(name = "orderDetail") OrderDetail orderDetail) {
-		
-		ModelAndView modelView = new ModelAndView("neworderservice"); 
+		this.orders = orderService.getOrders();
+		this.products = productService.getProducts();
+		ModelAndView modelView = new ModelAndView("neworderdetail"); 
+		String mensaje="Objeto guardado en la base de datos correctamente, "+orderDetail.getOrderLineNumber()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("orderDetail", orderDetailService.getOrderDetail());
 		orderDetailService.addOrderDetail(orderDetail);
+		modelView.addObject("orders", orders);
+		modelView.addObject("products", products);
 		
 		return modelView;
 	}
@@ -65,31 +70,34 @@ public class OrderDetailController {
 		model.addAttribute("orderDetail", orderDetailService.getOrderDetail());
 		model.addAttribute("orderDetails", orderDetailService.getOrderDetails());
 		
-		return "listorderdetail";
+		return "listaorderdetail";
 	}
 	
-	@GetMapping("/detalle/editar/{orderDetail}")
-	public ModelAndView editOrderDetail(@PathVariable Long orderDetail, Model model) {
-		
+	@GetMapping("/detalle/editar/{id}")
+	public ModelAndView editOrderDetail(@PathVariable Long id, Model model) {
+		this.orders = orderService.getOrders();
+		this.products = productService.getProducts();
 		ModelAndView modelView = new ModelAndView("neworderdetail");
-		Optional<OrderDetail> detail = orderDetailService.getOrderDetail(orderDetail);
+		Optional<OrderDetail> detail = orderDetailService.getOrderDetail(id);
 		model.addAttribute("orderDetail", detail);
+		modelView.addObject("orders", orders);
+		modelView.addObject("products", products);
 		
 		return modelView;
 	}
 	
-	@GetMapping("/detalle/borrar/{orderDetail}")
-	public String deleteOrderDetail(@PathVariable Long orderDetail, Model model) {
+	@GetMapping("/detalle/borrar/{id}")
+	public String deleteOrderDetail(@PathVariable Long id, Model model) {
 		
-		orderDetailService.deleteOrderDetail(orderDetail);
+		orderDetailService.deleteOrderDetail(id);
 		
 		return "redirect:/detalle/lista";
 	}
 	
-	@GetMapping("/detalle/seleccionar/{orderDetail}")
-	public String selectOrderDetail(@PathVariable Long orderDetail, Model model) {
+	@GetMapping("/detalle/seleccionar/{id}")
+	public String selectOrderDetail(@PathVariable Long id, Model model) {
 		
-		Optional<OrderDetail> detail = orderDetailService.getOrderDetail(orderDetail);
+		Optional<OrderDetail> detail = orderDetailService.getOrderDetail(id);
 		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: " + detail.get().getId()+ " ";                        
 		model.addAttribute("orderDetail", detail);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);

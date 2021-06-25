@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:insert="layout/head :: myhead">
+<!-- Required meta tags -->
+<meta content="text/html" charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div th:insert="layout/header :: header"></div>
+	<div th:if="${mensaje!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+		<strong th:text="${mensaje}"></strong> <a class="alert-link" href="/producto/lista"> Ver tabla</a>
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Registro de Productos</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/producto/guardar}" th:object="${product}" method="POST" enctype="multipart/form-data">
+							<div class="row mb-3">
+								<label for="codProd" class="col-sm-3 col-form-label fw-bold">Codigo</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{productCode}" id="codProd" placeholder="Ingrese el codigo del producto" title="Ingrese el codigo del producto">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="nameProd" class="col-sm-3 col-form-label fw-bold">Nombre</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{productName}" id="nameProd" placeholder="Ingrese el nombre del producto" title="Ingrese el nombre del producto">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="pline" class="col-sm-3 col-form-label fw-bold">Linea de Producto</label>
+							    <div class="col-sm-9">
+							    	<select class="form-select rounded-pill" id="codvend" th:field="*{productLine.productLine}">
+										<option th:each="prodLine : ${productLines}" th:value="${prodLine.productLine}" th:text="${prodLine.productLine}"></option>
+									</select>
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="scale" class="col-sm-3 col-form-label fw-bold">Escala</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{productScale}" id="scale" placeholder="Ingrese escala del producto" title="Ingrese escala del producto">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="pvendor" class="col-sm-3 col-form-label fw-bold">Proveedor</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{productVendor}" id="pvendor" placeholder="Ingrese nombre del proveedor" title="Ingrese nombre del proveedor">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="descripcion" class="col-sm-3 col-form-label fw-bold">Descripcion</label>
+							    <div class="col-sm-9">
+							      <input type="text" class="form-control rounded-pill" th:field="*{productDescription}" id="descripcion" placeholder="Ingrese descripcion del producto" title="Ingrese descripcion del producto">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="stock" class="col-sm-3 col-form-label fw-bold">Stock</label>
+							    <div class="col-sm-9">
+							      <input type="number" class="form-control rounded-pill" th:field="*{quantityInStock}" id="stock" placeholder="Ingrese cantidad en stock" title="Ingrese cantidad en stock">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="precio" class="col-sm-3 col-form-label fw-bold">Precio</label>
+							    <div class="col-sm-9">
+							      <input type="number" class="form-control rounded-pill" th:field="*{buyPrice}" id="precio" placeholder="Ingrese precio del producto" title="Ingrese precio del producto">
+							    </div>
+							</div>
+							<div class="row mb-3">
+								<label for="msrp" class="col-sm-3 col-form-label fw-bold">Precio Sugerido</label>
+							    <div class="col-sm-9">
+							      <input type="number" class="form-control rounded-pill" th:field="*{MSRP}" id="msrp" placeholder="Ingrese precio de venta al cliente" title="Ingrese precio de venta al cliente sugerido por el proveedor">
+							    </div>
+							</div>
+							 <div class="pt-2 text-center">
+							 	 <button type="reset"
+									class="btn btn-outline-danger rounded-pill">
+									Cancelar <i class="bi bi-x-circle-fill"></i>
+								</button>
+								<button type="submit"
+									class="btn btn-outline-success rounded-pill">
+									Guardar <i class="bi bi-check-circle-fill"></i>
+								</button>
+							 </div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<aside th:insert="layout/advertising :: aside"></aside>
+			</div>
+		</div>
+	</div>
+	<div th:insert="layout/footer :: footer"></div>
+</body>
+</html>

@@ -7,7 +7,7 @@ import ar.edu.unju.fi.tpfinal.model.Payment;
 
 public interface IPaymentService {
 	public Payment getPayment();
-	public void addPayment(Payment customer);
+	public void addPayment(Payment payment);
 	public void deletePayment(String checkNumber);
 	public Optional<Payment> getPayment(String checkNumber);
 	public List<Payment> getPayments();

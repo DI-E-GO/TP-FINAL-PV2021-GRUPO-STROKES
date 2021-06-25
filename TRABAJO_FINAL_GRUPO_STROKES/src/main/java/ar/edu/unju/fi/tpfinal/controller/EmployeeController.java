@@ -29,11 +29,11 @@ public class EmployeeController {
 	
 	List<Office> offices = new ArrayList<Office>();
 	
-	@GetMapping("/empleados/nuevo")
+	@GetMapping("/empleado/nuevo")
 	public String getEmployeeFormPage(Model model) {
 		
 		this.offices = officeService.getOffices();
-		model.addAttribute("employees", employeeService.getEmployee());
+		model.addAttribute("employee", employeeService.getEmployee());
 		model.addAttribute("offices", offices);
 		
 		return "nuevoemployee";
@@ -41,9 +41,12 @@ public class EmployeeController {
 	
 	@PostMapping("/empleado/guardar")
 	public ModelAndView saveNewEmployee(Model model, @ModelAttribute(name = "employee") Employee employee) {
-		
+		this.offices = officeService.getOffices();
 		ModelAndView modelView = new ModelAndView("nuevoemployee");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+employee.getFirstName()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("employee", employeeService.getEmployee());
+		modelView.addObject("offices", offices);
 		employeeService.addEmployee(employee);
 		
 		return modelView; 
@@ -58,28 +61,29 @@ public class EmployeeController {
 		return "listaemployee";
 	}
 
-	@GetMapping("/empleado/editar/{employee}")
-	public ModelAndView editEmployee(@PathVariable Long employee, Model model) {
-		
+	@GetMapping("/empleado/editar/{employeeNumber}")
+	public ModelAndView editEmployee(@PathVariable Long employeeNumber, Model model) {
+		this.offices = officeService.getOffices();
 		ModelAndView modelView = new ModelAndView("nuevoemployee");
-		Optional<Employee> empleado = employeeService.getEmployee(employee);
+		Optional<Employee> empleado = employeeService.getEmployee(employeeNumber);
 		model.addAttribute("employee", empleado);
+		modelView.addObject("offices", offices);
 		
 		return modelView;
 	}
 	
-	@GetMapping("/empleado/borrar/{employee}")
-	public String deleteEmployee(@PathVariable Long employee, Model model) {
+	@GetMapping("/empleado/borrar/{employeeNumber}")
+	public String deleteEmployee(@PathVariable Long employeeNumber, Model model) {
 		
-		employeeService.deleteEmployee(employee);
+		employeeService.deleteEmployee(employeeNumber);
 		
 		return "redirect:/empleado/lista";
 	}
 	
-	@GetMapping("/empleado/seleccionar/{employee}")
-	public String selectEmployee(@PathVariable Long employee, Model model) {
+	@GetMapping("/empleado/seleccionar/{employeeNumber}")
+	public String selectEmployee(@PathVariable Long employeeNumber, Model model) {
 		
-		Optional<Employee> empleado = employeeService.getEmployee(employee);
+		Optional<Employee> empleado = employeeService.getEmployee(employeeNumber);
 		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: " + empleado.get().getEmployeeNumber()+ " ";                        
 		model.addAttribute("employee", empleado);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);

@@ -32,6 +32,8 @@ public class OfficeController {
 	public ModelAndView saveNewOffice(Model model , @ModelAttribute(name = "office") Office office) {
 		
 		ModelAndView modelView = new ModelAndView("nuevaoffice");
+		String mensaje="Objeto guardado en la base de datos correctamente, "+office.getOfficeCode()+": ";
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("office", officeService.getOffice());
 		officeService.addOffice(office);
 		
@@ -47,28 +49,28 @@ public class OfficeController {
 		return "listaoffice";
 	}
 	
-	@GetMapping("/oficina/editar/{office}")
-	public ModelAndView editOffice(@PathVariable String office, Model model) {
+	@GetMapping("/oficina/editar/{officeCode}")
+	public ModelAndView editOffice(@PathVariable String officeCode, Model model) {
 		
 		ModelAndView modelView = new ModelAndView("nuevaoffice");
-		Optional<Office> oficina = officeService.getOffice(office);
+		Optional<Office> oficina = officeService.getOffice(officeCode);
 		model.addAttribute("office", oficina);
 		
 		return modelView;
 	}
 	
-	@GetMapping("/oficina/borrar/{office}")
-	public String deleteOffice(@PathVariable String office, Model model) {
+	@GetMapping("/oficina/borrar/{officeCode}")
+	public String deleteOffice(@PathVariable String officeCode, Model model) {
 		
-		officeService.deleteOffice(office);
+		officeService.deleteOffice(officeCode);
 		
 		return "redirect:/oficina/lista";
 	}
 	
-	@GetMapping("/oficina/seleccionar/{office}")
-	public String selectOffice(@PathVariable String office, Model model) {
+	@GetMapping("/oficina/seleccionar/{officeCode}")
+	public String selectOffice(@PathVariable String officeCode, Model model) {
 		
-		Optional<Office> oficina = officeService.getOffice(office);
+		Optional<Office> oficina = officeService.getOffice(officeCode);
 		String mensajeBorrar = "Usted está por eliminar un objeto de la base de datos: " + oficina.get().getOfficeCode()+ " ";                        
 		model.addAttribute("office", oficina);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
