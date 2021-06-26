@@ -25,26 +25,42 @@
 								<label for="numcli" class="col-sm-3 col-form-label fw-bold">N° de cliente</label>
 							    <div class="col-sm-9">
 							    	<select class="form-select rounded-pill" id="numcli" th:field="*{customerNumber.customerNumber}">
-										<option th:each="nCli : ${customers}" th:value="${nCli.customerNumber}" th:text="${nCli.customerNumber}"></option>
+										<option th:each="nCli : ${customers}" th:value="${nCli.customerNumber}" th:text="${nCli.customerNumber}+' - '+ ${nCli.customerName}"></option>
 									</select>
+							    	<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('customerNumber.customerNumber')}" th:errors="*{customerNumber.customerNumber}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="check" class="col-sm-3 col-form-label fw-bold">Número de Verificacion</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{checkNumber}" id="chek" placeholder="Ingrese un numero de verificacion" title="Ingrese un numero de verificacion">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('checkNumber')}" th:errors="*{checkNumber}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="datepayment" class="col-sm-3 col-form-label fw-bold">Fecha de Pago</label>
 							    <div class="col-sm-9">
 							      <input type="date" class="form-control rounded-pill" th:field="*{paymentDate}" id="datepayment" title="Ingrese la fecha de pago">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('paymentDate')}" th:errors="*{paymentDate}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="monto" class="col-sm-3 col-form-label fw-bold">Monto</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{amount}" id="monto" title="Ingrese monto">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></span>
+							    	</div>
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">

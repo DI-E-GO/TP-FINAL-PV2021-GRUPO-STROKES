@@ -57,7 +57,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 	}
 
 	@Override
-	public Employee searchEmployee(int numero, String email) {
+	public Employee searchEmployee(Long numero, String email) {
 		return employeeRepository.findByEmployeeNumberAndEmailGreaterThanEqual(numero, email);
 	}
 

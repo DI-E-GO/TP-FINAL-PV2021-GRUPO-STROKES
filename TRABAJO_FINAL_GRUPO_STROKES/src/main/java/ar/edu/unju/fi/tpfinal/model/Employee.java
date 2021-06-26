@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -31,23 +34,24 @@ import org.springframework.stereotype.Component;
 public class Employee {
 	
 	//Atributos 
-	
+	@NotNull(message = "Ingrese el numero de empleado")
 	@Id
 	@Column(name = "employee_number_id")
 	private Long employeeNumber;
-	
+	@NotEmpty(message = "Ingrese un nombre para el empleado")
 	@Column(name = "last_name")
 	private String lastName;
-	
+	@NotEmpty(message = "Ingrese un apellido para el empleado")
 	@Column(name = "first_name")
 	private String firstName;
-	
+	@NotEmpty(message = "Falta codigo de extencion")
 	@Column(name = "extension")
 	private String extension;
-	
+	@Email(message = "Ingrese un correo válido")
+	@NotEmpty(message = "Ingrese una dirección de correo")
 	@Column(name = "email")
 	private String email;
-	
+	@NotNull(message = "Seleccione una extención")
 	@ManyToOne
 	@JoinColumn(name = "office_code_id")
 	private Office officeCode;
@@ -58,7 +62,7 @@ public class Employee {
 	
 	@OneToMany(mappedBy = "oneEmployee")
 	private List<Employee> reportsTo;
-	
+	@NotEmpty(message = "Ingrese el cargo del empleado")
 	@Column(name = "job_title")
 	private String jobTitle;
 	

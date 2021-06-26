@@ -25,15 +25,21 @@
 							<div class="row mb-3">
 								<label for="codigo" class="col-sm-3 col-form-label fw-bold">Tipo</label>
 								<div class="col-sm-9">
-									<input type="text" th:field="*{productLine}"
-										class="rounded-pill form-control" id="codigo">
+									<input type="text" th:field="*{productLine}" class="rounded-pill form-control" id="codigo">
+								<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productLine')}" th:errors="*{productLine}"></span>
+							    	</div>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<label for="descripcion" class="col-sm-3 col-form-label fw-bold">Descripción</label>
 								<div class="col-sm-9">
-									<textarea th:field="*{textDescription}"
-										class="form-control" id="descripcion"></textarea>
+									<textarea th:field="*{textDescription}" class="form-control" id="descripcion"></textarea>
+								<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('textDescription')}" th:errors="*{textDescription}"></span>
+							    	</div>
 								</div>
 							</div>
 							<div class="row mb-3">

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -29,19 +31,19 @@ import org.springframework.stereotype.Component;
 public class Payment{
 
 	//Atributos
-
+	@NotNull(message = "Se solicita un numero de cliente")
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_number")
+	@JoinColumn(name = "customer_number_id")
 	private Customer customerNumber;
-	
+	@NotEmpty(message = "Ingrese un código de verificación")
 	@Id
 	@Column(name = "check_number_id")
 	private String checkNumber;
-	
+	@NotNull(message = "Falta la fecha de pago")
 	@Column(name = "payment_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date paymentDate;
-	
+	@NotNull(message = "Ingrese el monto a pagar")
 	@Column(name = "amount")
 	private Double amount;
 	

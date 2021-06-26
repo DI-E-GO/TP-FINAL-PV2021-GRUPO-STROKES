@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Employee;
 import ar.edu.unju.fi.tpfinal.model.Usuario;
@@ -36,18 +37,21 @@ public class LoginController {
 		return "registro";
 	}
 	@PostMapping("/auth/registro")
-	public String registro(@RequestParam(name = "employeeNumber")int numero, @RequestParam(name = "email")String email, @Valid @ModelAttribute Usuario unUsuario, BindingResult result, Model model) {
+	public ModelAndView registro(@RequestParam(name = "employeeNumber")Long numero, @RequestParam(name = "email")String email, @Valid @ModelAttribute Usuario unUsuario, BindingResult result, Model model) {
+		ModelAndView modelView;
 		Employee employee = employeeService.searchEmployee(numero, email);
 		String mensajeError = null;
 		if (result.hasErrors()||employee==null) {
+			modelView = new ModelAndView("registro");
 			mensajeError = "No se pudo registrar al usuario, campos incorrectos";
-			model.addAttribute("mensaje", mensajeError);
-			return "registro";
+			modelView.addObject("mensaje", mensajeError);
+			return modelView;
 		} else {
+			modelView = new ModelAndView("login");
 			unUsuario.setRol(employee.getJobTitle());
 			unUsuario.setEmployee(employee);
-			model.addAttribute("usuario", usuarioService.registrar(unUsuario));
+			modelView.addObject("usuario", usuarioService.registrar(unUsuario));
+			return modelView;
 		}
-		return "redirect:/auth/login";
 	}
 }

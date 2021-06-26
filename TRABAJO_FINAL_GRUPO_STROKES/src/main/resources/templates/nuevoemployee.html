@@ -25,45 +25,71 @@
 								<label for="nemployee" class="col-sm-3 col-form-label fw-bold">Número de Empleado</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{employeeNumber}" id="nemployee" placeholder="Ingrese numero de empleado" title="Ingrese numero de empleado">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('employeeNumber')}" th:errors="*{employeeNumber}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="apellido" class="col-sm-3 col-form-label fw-bold">Apellido</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{lastName}" id="apellido" title="Ingrese su apellido" placeholder="Ingrese su apellido">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="name" class="col-sm-3 col-form-label fw-bold">Nombre</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{firstName}" id="name" placeholder="Ingrese su nombre" title="Ingrese su nombre">
+							     <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="extension" class="col-sm-3 col-form-label fw-bold">Extension</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{extension}" id="extension" title="Ingrese extencion" placeholder="Ingrese extencion">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('extension')}" th:errors="*{extension}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="email" class="col-sm-3 col-form-label fw-bold">Email</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{email}" id="email" placeholder="Ingrese su Email" title="Ingrese su Email">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="coffice" class="col-sm-3 col-form-label fw-bold">Codigo de Oficina</label>
 							    <div class="col-sm-9">
 							    	<select class="form-select rounded-pill" id="coffice" th:field="*{officeCode.officeCode}">
-										<option th:each="cOffice : ${offices}" th:value="${cOffice.officeCode}" th:text="${cOffice.officeCode}"></option>
+										<option selected value="null">Seleccione una opción</option>
+										<option th:each="cOffice : ${offices}" th:value="${cOffice.officeCode}" th:text="${cOffice.officeCode}+' - '+ ${cOffice.city}"></option>
 									</select>
+									<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('officeCode.officeCode')}" th:errors="*{officeCode.officeCode}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="report" class="col-sm-3 col-form-label fw-bold">Informar a</label>
 							    <div class="col-sm-9">
 							    	<select class="form-select rounded-pill" id="report" th:field="*{reportsTo}">
-										<option th:each="nemployee : ${employees}" th:value="${nemployee.reportsTo}" th:text="${nemployee.reportsTo}"></option>
+										<option selected value="empty">Seleccione una opción</option>
+										<option th:each="nemployee : ${employees}" th:value="${nemployee.employeeNumber}" th:text="${nemployee.employeeNumber}+' - '+ ${nemployee.firstName}+' '+ ${nemployee.lastName}"></option>
 									</select>
 							    </div>
 							</div>
@@ -71,6 +97,10 @@
 								<label for="cargo" class="col-sm-3 col-form-label fw-bold">Cargo</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{jobTitle}" id="cargo" placeholder="Ingrese cargo que ocupa" title="Ingrese cargo que ocupa">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}"></span>
+							    	</div>
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
@@ -16,10 +17,11 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "PRODUCT_LINES")
 public class ProductLine {
+	@NotEmpty(message = "Ingrese una nueva linea de producto")
 	@Id
 	@Column(name = "product_line_id")
 	private String productLine;
-	
+	@NotEmpty(message = "Ingrese una descripcion sobre la linea de producto")
 	@Size(max = 4000)
 	@Column(name = "text_description")
 	private String textDescription;

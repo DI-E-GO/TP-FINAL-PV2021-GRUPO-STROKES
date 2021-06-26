@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -31,29 +34,29 @@ import org.springframework.stereotype.Component;
 public class Customer {
 
 	//Atributos
-	
+	@NotNull(message = "Ingrese un numero de usuario")
 	@Id
 	@Column(name = "customer_number_id")
 	private Long customerNumber;
-	
+	@NotEmpty(message = "Ingrese nombre del negocio del cliente")
 	@Column(name = "customer_name")
 	private String customerName;
-	
+	@NotEmpty(message = "Ingrese apellido del contacto")
 	@Column(name = "contact_last_name")
 	private String contactLastName;
-	
+	@NotEmpty(message = "Ingrese nombre del contacto")
 	@Column(name = "contact_first_name")
 	private String contactFirstName;
-	
+	@NotEmpty(message = "Ingrese un telefono")
 	@Column(name = "phone")
 	private String phone;
-	
+	@NotEmpty(message = "Ingrese una direccion")
 	@Column(name = "address_line_1")
 	private String addressLine1;
 	
 	@Column(name = "address_line_2")
 	private String addressLine2;
-	
+	@NotEmpty(message = "Ingrese una ciudad")
 	@Column(name = "city")
 	private String city;
 	
@@ -62,14 +65,15 @@ public class Customer {
 	
 	@Column(name = "postal_code")
 	private String postalCode;
-	
+
 	@Column(name = "country")
 	private String country;
 	
 	@ManyToOne()
 	@JoinColumn(name = "sales_rep_employee_number_id")
 	private Employee salesRepEmployeeNumber;
-	
+	@NotNull(message = "Ingrese un limite de credito")
+	@Min(value = 0, message = "Ingreso un valor negativo")
 	@Column(name = "credit_limit")
 	private Double creditLimit;
 	

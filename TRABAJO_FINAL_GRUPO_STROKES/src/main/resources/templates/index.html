@@ -11,10 +11,10 @@
 		<div class="row">
 			<div class="col-md-9 d-flex justify-content-center">
 				<div class="col-mb-6 mt-4">
-					<div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+					<div class="card border-success mb-3" style="max-width: 18rem;">
 						<h4 class="card-header">Datos del Empleado</h4>
 						<div class="card-body">
-							<h5 th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}" class="card-title"></h5>
+							<h5 th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}+' - '+ ${session.usuario.employee.jobTitle}" class="card-title"></h5>
 							<span>Correo: </span><p th:text="${session.usuario.employee.email}" class="card-text"></p>
 							<span>Ciudad: </span><p th:text="${session.usuario.employee.officeCode.city}" class="card-text"></p>
 							<span>Teléfono: </span><p th:text="${session.usuario.employee.officeCode.phone}" class="card-text"></p>

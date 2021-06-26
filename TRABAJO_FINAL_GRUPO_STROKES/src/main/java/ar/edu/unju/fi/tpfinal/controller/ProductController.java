@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,15 +43,22 @@ public class ProductController {
 	}
 	
 	@PostMapping("/producto/guardar")
-	public ModelAndView saveNewProduct(Model model, @ModelAttribute(name = "product") Product product) {
-		this.productLines = productLineService.getProductLines();
-		ModelAndView modelView = new ModelAndView("nuevoproduct");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+product.getProductName()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("product", productService.getProduct());
-		productService.addProduct(product);
-		modelView.addObject("productLines", productLines);
-		return modelView;
+	public ModelAndView saveNewProduct(Model model, @Valid @ModelAttribute(name = "product") Product product, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("nuevoproduct");
+			modelView.addObject("productLines", productLineService.getProductLines());
+			return modelView;
+		} else {
+			this.productLines = productLineService.getProductLines();
+			modelView = new ModelAndView("nuevoproduct");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+product.getProductName()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("product", productService.getProduct());
+			productService.addProduct(product);
+			modelView.addObject("productLines", productLines);
+			return modelView;
+		}
 	}
 	
 	@GetMapping("/producto/lista")

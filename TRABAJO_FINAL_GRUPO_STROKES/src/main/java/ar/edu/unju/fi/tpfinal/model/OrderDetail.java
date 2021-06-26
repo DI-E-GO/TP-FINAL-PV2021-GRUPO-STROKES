@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -20,6 +23,7 @@ public class OrderDetail implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@NotNull(message = "ID obligatoria")
 	@Id
 	@Column
 	private Long id;
@@ -30,13 +34,16 @@ public class OrderDetail implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "orderNumber")
 	private Order orderNumber;
-	
+	@NotNull(message = "Ingrese la cantidad de pedido")
+	@Min(value = 1, message = "No se permiten numeros negativos o cero")
 	@Column(name = "quantityOrdered")
 	private int quantityOrdered;
-	
+	@NotNull(message = "Ingrese precio por unidad")
+	@DecimalMin(value = "1", message = "Ingrese un precio")
 	@Column(name = "priceEach")
 	private double priceEach;
-	
+	@NotNull(message = "Se requiere numero de linea de orden")
+	@Min(value = 1, message = "No se permiten numeros negativos o cero")
 	@Column(name = "orderLineNumber")
 	private short orderLineNumber;
 	

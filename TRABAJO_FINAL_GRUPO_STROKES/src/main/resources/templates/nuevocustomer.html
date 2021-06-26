@@ -22,39 +22,63 @@
 					<div class="card-body">
 						<form th:action="@{/cliente/guardar}" th:object="${customer}" method="POST">
 							<div class="row mb-3">
-								<label for="numCliente" class="col-sm-3 col-form-label fw-bold">N° de Cliente</label>
+								<label for="numCliente" class="col-sm-3 col-form-label fw-bold">N° de Cliente<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
-							      <input type="number" class="form-control rounded-pill" th:field="*{customerNumber}" id="numCliente" title="Ingrese numero de cliente">
+							      <input type="number" class="form-control rounded-pill" th:field="*{customerNumber}" id="numCliente" placeholder="Ingrese numero de cliente" title="Ingrese numero de cliente">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('customerNumber')}" th:errors="*{customerNumber}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="nameCliente" class="col-sm-3 col-form-label fw-bold">Nombre de su Negocio</label>
+								<label for="nameCliente" class="col-sm-3 col-form-label fw-bold">Nombre de su Negocio<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{customerName}" id="nameCliente" title="Ingrese el nombre de su negocio">
+							      <input type="text" class="form-control rounded-pill" th:field="*{customerName}" id="nameCliente" placeholder="Ingrese el nombre del negocio" title="Ingrese el nombre de su negocio">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="apellidoCliente" class="col-sm-3 col-form-label fw-bold">Apellido</label>
+								<label for="apellidoCliente" class="col-sm-3 col-form-label fw-bold">Apellido<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{contactLastName}" id="apellidoCliente" placeholder="Ingrese su apellido" title="Ingrese su apellido">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('contactLastName')}" th:errors="*{contactLastName}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="nombreCliente" class="col-sm-3 col-form-label fw-bold">Nombre</label>
+								<label for="nombreCliente" class="col-sm-3 col-form-label fw-bold">Nombre<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{contactFirstName}" id="nombreCliente" placeholder="Ingrese su nombre" title="Ingrese su nombre">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('contactFirstName')}" th:errors="*{contactFirstName}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="telefono" class="col-sm-3 col-form-label fw-bold">N° de Telefono</label>
+								<label for="telefono" class="col-sm-3 col-form-label fw-bold">N° de Telefono<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{phone}" id="telefono" placeholder="Ingrese numero de telefono" title="Ingrese numero de telefono">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="direccion" class="col-sm-3 col-form-label fw-bold">Direccion</label>
+								<label for="direccion" class="col-sm-3 col-form-label fw-bold">Direccion<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{addressLine1}" id="direccion" placeholder="Ingrese su direccion" title="Ingrese su direccion">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -64,9 +88,13 @@
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="provincia" class="col-sm-3 col-form-label fw-bold">Provincia</label>
+								<label for="provincia" class="col-sm-3 col-form-label fw-bold">Provincia<span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{city}" id="provincia" placeholder="Ingrese Provincia de residencia" title="Ingrese provincia de residencia">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -91,14 +119,19 @@
 								<label for="codvend" class="col-sm-3 col-form-label fw-bold">Codigo de vendedor</label>
 							    <div class="col-sm-9">
 							    	<select class="form-select rounded-pill" id="codvend" th:field="*{employee.employeeNumber}">
-										<option th:each="codVend : ${employees}" th:value="${codVend.employeeNumber}" th:text="${codVend.employeeNumber}"></option>
+										<option selected value="null">Seleccione un Vendedor</option>
+										<option th:each="codVend : ${employees}" th:value="${codVend.employeeNumber}" th:text="${codVend.employeeNumber}+' - '+ ${codVend.firstName}+' '+ ${codVend.lastName}"></option>
 									</select>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="limiteCred" class="col-sm-3 col-form-label fw-bold">Limite de Credito</label>
+								<label for="limiteCred" class="col-sm-3 col-form-label fw-bold">Limite de Credito <span class="text-danger">*</span></label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{creditLimit}" id="limiteCred" placeholder="Ingrese su limite de credito" title="Ingrese su limite de credito">
+							    	<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('creditLimit')}" th:errors="*{creditLimit}"></span>
+							    	</div>
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">
