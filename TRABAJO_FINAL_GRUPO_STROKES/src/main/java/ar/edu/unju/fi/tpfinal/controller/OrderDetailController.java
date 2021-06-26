@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,18 +53,25 @@ public class OrderDetailController {
 	}
 	
 	@PostMapping("/detalle/guardar")
-	public ModelAndView saveNewOrderDetail(Model model, @ModelAttribute(name = "orderDetail") OrderDetail orderDetail) {
-		this.orders = orderService.getOrders();
-		this.products = productService.getProducts();
-		ModelAndView modelView = new ModelAndView("neworderdetail"); 
-		String mensaje="Objeto guardado en la base de datos correctamente, "+orderDetail.getOrderLineNumber()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("orderDetail", orderDetailService.getOrderDetail());
-		orderDetailService.addOrderDetail(orderDetail);
-		modelView.addObject("orders", orders);
-		modelView.addObject("products", products);
-		
-		return modelView;
+	public ModelAndView saveNewOrderDetail(Model model, @Valid @ModelAttribute(name = "orderDetail") OrderDetail orderDetail, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("neworderdetail");
+			modelView.addObject("orders", orderService.getOrders());
+			modelView.addObject("products", productService.getProducts());
+			return modelView;
+		} else {
+			this.orders = orderService.getOrders();
+			this.products = productService.getProducts();
+			modelView = new ModelAndView("neworderdetail"); 
+			String mensaje="Objeto guardado en la base de datos correctamente, "+orderDetail.getOrderLineNumber()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("orderDetail", orderDetailService.getOrderDetail());
+			orderDetailService.addOrderDetail(orderDetail);
+			modelView.addObject("orders", orders);
+			modelView.addObject("products", products);
+			return modelView;
+		}
 	}
 	
 	@GetMapping("/detalle/lista")

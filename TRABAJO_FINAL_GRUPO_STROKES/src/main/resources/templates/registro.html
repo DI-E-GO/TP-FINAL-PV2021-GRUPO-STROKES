@@ -23,25 +23,33 @@
 							<div class="row mb-3">
 								<label for="inputEmployeeNumber" class="col-sm-3 col-form-label fw-bold">Numero de Empleado</label>
 								<div class="col-sm-9">
-									<input type="number" id="inputEmployeeNumber" class="rounded-pill form-control" name="employeeNumber">
+									<input type="number" id="inputEmployeeNumber" required="required" class="rounded-pill form-control" name="employeeNumber">
 								</div>
 							</div>
 							<div class="row mb-3">
 								<label for="inputEmployeeEmail" class="col-sm-3 col-form-label fw-bold">Correo del Empleado</label>
 								<div class="col-sm-9">
-									<input type="email" id="inputEmployeeEmail" class="rounded-pill form-control" name="email">
+									<input type="email" id="inputEmployeeEmail" required="required" class="rounded-pill form-control" name="email">
 								</div>
 							</div>
 							<div class="row mb-3">
 								<label for="inputUsername" class="col-sm-3 col-form-label fw-bold">Nombre de Usuario</label>
 								<div class="col-sm-9">
 									<input type="text" id="inputUsername" class="rounded-pill form-control" th:field="*{username}">
+								<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+							    	</div>
 								</div>
 							</div>
 							<div class="row mb-3">
 								<label for="inputPassword" class="col-sm-3 col-form-label fw-bold">Contraseña</label>
 								<div class="col-sm-9">
 									<input type="password" id="inputUPassword" class="rounded-pill form-control" th:field="*{password}">
+								<!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+							    	</div>
 								</div>
 							</div>
 							<div class="pt-2 text-center">

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 
@@ -28,16 +29,17 @@ import org.springframework.stereotype.Component;
 public class Office {
 	
 	//Atributos
+	@NotEmpty(message = "Ingrese numero de oficina")
 	@Id
 	@Column(name = "office_code_id")
 	private String officeCode; 
-	
+	@NotEmpty(message = "Ingrese una ciudad")
 	@Column(name = "city")
 	private String city;
-	
+	@NotEmpty(message = "Se requiere un numero telefónico")
 	@Column(name = "phone")
 	private String phone;
-	
+	@NotEmpty(message = "Ingrese una dirección")
 	@Column(name = "address_line1")
 	private String addressLine1;
 	
@@ -46,13 +48,13 @@ public class Office {
 	
 	@Column(name = "state")
 	private String state;
-	
+	@NotEmpty(message = "Ingrese un pais")
 	@Column(name = "country")
 	private String country;
-	
+	@NotEmpty(message = "Se requiere un código postal")
 	@Column(name = "postal_code")
 	private String postalCode;
-	
+	@NotEmpty(message = "Ingrese una zona de ventas, ej. NA(Noth America), EMEAC(Europe, the Middle East and Africa),etc")
 	@Column(name = "territory")
 	private String territory;
 	

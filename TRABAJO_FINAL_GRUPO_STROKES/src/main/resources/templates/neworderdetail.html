@@ -25,6 +25,10 @@
 								<label for="id" class="col-sm-3 col-form-label fw-bold">ID de Recibo</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{id}" id="id" placeholder="Ingrese el numero de ID">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -47,18 +51,30 @@
 								<label for="cantidad" class="col-sm-3 col-form-label fw-bold">Cantidad</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{quantityOrdered}" id="cantidad" title="Ingrese cantidad de compra">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('quantityOrdered')}" th:errors="*{quantityOrdered}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="precio" class="col-sm-3 col-form-label fw-bold">Precio</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{priceEach}" id="precio" placeholder="Ingrese el precio" title="Ingrese el precio">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('priceEach')}" th:errors="*{priceEach}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="numre" class="col-sm-3 col-form-label fw-bold">Numero de Recibo</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{orderLineNumber}" id="numre" placeholder="Ingrese numero de recibo" title="Ingrese numero de recibo">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('orderLineNumber')}" th:errors="*{orderLineNumber}"></span>
+							    	</div>
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">

@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -16,23 +18,23 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "ORDERS")
 public class Order {
-	
+	@NotNull(message = "Ingrese un numero de orden")
 	@Id
 	@Column(name = "order_number")
 	private Long orderNumber;
-	
+	@NotNull(message = "Ingrese la fecha de creacion de la orden")
 	@Column(name = "order_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate orderDate;
-	
+	@NotNull(message = "Ingresar fecha requerida")
 	@Column(name = "required_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate requiredDate;
-	
+	@NotNull(message = "Ingrese la fecha de envío")
 	@Column(name = "shipped_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate shippedDate;
-	
+	@NotEmpty(message = "Ingrese el estado de orden, Shipped, Cancelled, Resolved, etc")
 	@Column(name = "status")
 	private String status;
 	

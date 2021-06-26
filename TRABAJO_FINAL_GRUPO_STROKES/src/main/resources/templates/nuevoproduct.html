@@ -25,12 +25,20 @@
 								<label for="codProd" class="col-sm-3 col-form-label fw-bold">Codigo</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{productCode}" id="codProd" placeholder="Ingrese el codigo del producto" title="Ingrese el codigo del producto">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productCode')}" th:errors="*{productCode}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="nameProd" class="col-sm-3 col-form-label fw-bold">Nombre</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{productName}" id="nameProd" placeholder="Ingrese el nombre del producto" title="Ingrese el nombre del producto">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -39,42 +47,70 @@
 							    	<select class="form-select rounded-pill" id="codvend" th:field="*{productLine.productLine}">
 										<option th:each="prodLine : ${productLines}" th:value="${prodLine.productLine}" th:text="${prodLine.productLine}"></option>
 									</select>
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productLine.productLine')}" th:errors="*{productLine.productLine}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="scale" class="col-sm-3 col-form-label fw-bold">Escala</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{productScale}" id="scale" placeholder="Ingrese escala del producto" title="Ingrese escala del producto">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productScale')}" th:errors="*{productScale}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="pvendor" class="col-sm-3 col-form-label fw-bold">Proveedor</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{productVendor}" id="pvendor" placeholder="Ingrese nombre del proveedor" title="Ingrese nombre del proveedor">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productVendor')}" th:errors="*{productVendor}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="descripcion" class="col-sm-3 col-form-label fw-bold">Descripcion</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{productDescription}" id="descripcion" placeholder="Ingrese descripcion del producto" title="Ingrese descripcion del producto">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="stock" class="col-sm-3 col-form-label fw-bold">Stock</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{quantityInStock}" id="stock" placeholder="Ingrese cantidad en stock" title="Ingrese cantidad en stock">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="precio" class="col-sm-3 col-form-label fw-bold">Precio</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{buyPrice}" id="precio" placeholder="Ingrese precio del producto" title="Ingrese precio del producto">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('buyPrice')}" th:errors="*{buyPrice}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="msrp" class="col-sm-3 col-form-label fw-bold">Precio Sugerido</label>
 							    <div class="col-sm-9">
 							      <input type="number" class="form-control rounded-pill" th:field="*{MSRP}" id="msrp" placeholder="Ingrese precio de venta al cliente" title="Ingrese precio de venta al cliente sugerido por el proveedor">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('MSRP')}" th:errors="*{MSRP}"></span>
+							    	</div>
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">

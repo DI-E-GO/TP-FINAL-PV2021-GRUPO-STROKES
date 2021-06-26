@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,22 +36,29 @@ public class CustomerController {
 	public String getFormCustomerPage(Model model) {
 		this.employees = employeeService.getEmployees();
 		
-		model.addAttribute("customer", customerService.getCustomer());
+		model.addAttribute(customerService.getCustomer());
 		model.addAttribute("employees", employees);
 		
 		return "nuevocustomer";
 	}
 	
 	@PostMapping("/cliente/guardar")
-	public ModelAndView saveNewCustomer(Model model, @ModelAttribute(name = "customer") Customer customer) {
-		this.employees = employeeService.getEmployees();
-		ModelAndView modelView = new ModelAndView("nuevoCustomer");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+customer.getCustomerName()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("customer", customerService.getCustomer());
-		customerService.addCustomer(customer);
-		modelView.addObject("employees", employees);
-		return modelView;
+	public ModelAndView saveNewCustomer(Model model, @Valid @ModelAttribute("customer") Customer customer, BindingResult resultadoValidacion) {
+		ModelAndView modelView;
+		if (resultadoValidacion.hasErrors()) {
+			this.employees = employeeService.getEmployees();
+			modelView = new ModelAndView("nuevoCustomer");
+			return modelView;
+		} else {
+			this.employees = employeeService.getEmployees();
+			modelView = new ModelAndView("nuevoCustomer");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+customer.getCustomerName()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("customer", customerService.getCustomer());
+			customerService.addCustomer(customer);
+			modelView.addObject("employees", employees);
+			return modelView;
+		}
 	}
 	
 	@GetMapping("/cliente/lista")

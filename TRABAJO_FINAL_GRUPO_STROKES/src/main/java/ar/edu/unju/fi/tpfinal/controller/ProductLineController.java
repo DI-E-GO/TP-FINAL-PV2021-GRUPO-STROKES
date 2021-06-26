@@ -2,9 +2,12 @@ package ar.edu.unju.fi.tpfinal.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,13 +29,19 @@ public class ProductLineController {
 		return "nuevo-productline";
 	}
 	@PostMapping("/productline/guardar")
-	public ModelAndView saveProductLine(Model model,@RequestParam("file") MultipartFile file, @ModelAttribute("productline")ProductLine productLine) {
-		ModelAndView modelView = new ModelAndView("nuevo-productline");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+productLine.getProductLine()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("productline", productLineService.getProductLine());
-		productLineService.addProductLine(file, productLine);
-		return modelView;
+	public ModelAndView saveProductLine(Model model,@RequestParam("file") MultipartFile file, @Valid @ModelAttribute("productline")ProductLine productLine, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("nuevo-productline");
+			return modelView;
+		} else {
+			modelView = new ModelAndView("nuevo-productline");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+productLine.getProductLine()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("productline", productLineService.getProductLine());
+			productLineService.addProductLine(file, productLine);
+			return modelView;
+		}
 	}
 	@GetMapping("/productline/lista")
 	public String listProductLinePage(Model model) {

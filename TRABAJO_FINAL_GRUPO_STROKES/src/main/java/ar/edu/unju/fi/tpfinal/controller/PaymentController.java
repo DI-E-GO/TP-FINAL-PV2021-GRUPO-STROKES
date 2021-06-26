@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +32,7 @@ public class PaymentController {
 	
 	List<Customer> customers = new ArrayList<Customer>();
 	
-	@GetMapping("/pagos/nuevo")
+	@GetMapping("/pago/nuevo")
 	public String getPaymentFormPage(Model model) {
 		this.customers = customerService.getCustomers();
 		model.addAttribute("payment", paymentService.getPayment());
@@ -38,19 +41,25 @@ public class PaymentController {
 	}
 	
 	@PostMapping("/pago/guardar")
-	public ModelAndView saveNewPayment(Model model, @ModelAttribute(name = "payment") Payment payment) {
-		this.customers = customerService.getCustomers();
-		ModelAndView modelView = new ModelAndView("nuevopayment");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+payment.getCheckNumber()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("payment", paymentService.getPayment());
-		paymentService.addPayment(payment);
-		modelView.addObject("customers", customers);
-		
-		return modelView;
+	public ModelAndView saveNewPayment(Model model, @Valid @ModelAttribute(name = "payment") Payment payment, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("nuevopayment");
+			modelView.addObject("customers", customerService.getCustomers());
+			return modelView;
+		} else {
+			this.customers = customerService.getCustomers();
+			modelView = new ModelAndView("nuevopayment");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+payment.getCheckNumber()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("payment", paymentService.getPayment());
+			paymentService.addPayment(payment);
+			modelView.addObject("customers", customers);
+			return modelView;
+		}
 	}
 	
-	@GetMapping("/pagos/lista")
+	@GetMapping("/pago/lista")
 	public String getPaymentListPage(Model model) {
 		
 		model.addAttribute("payment", paymentService.getPayment());

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author Diego
@@ -28,7 +30,10 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message = "Ingrese un usuario")
+	@NotBlank(message = "No se permiten espacios en blanco para el nombre de usuario")
 	private String username;
+	@NotEmpty(message = "Ingrese una contraseña")
 	private String password;
 	@JoinColumn(name = "employee_id")
     @OneToOne(fetch = FetchType.LAZY)	

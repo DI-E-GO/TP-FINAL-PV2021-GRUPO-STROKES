@@ -29,36 +29,84 @@
 						<li class="nav-item"><a class="nav-link" href="#">Sobre
 								nosotros</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">Contáctenos</a></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-							href="#" role="button" aria-haspopup="true" aria-expanded="false">Administrador</a>
+						<li th:if="${session.usuario!=null&&session.usuario.rol!='Sales Rep'}" class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+							href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu del Administrador</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="/productline/nuevo"><i
-									class="bi bi-save"></i> Crear - Linea de Producto</a> <a
-									class="dropdown-item" href="/productline/lista"><i
-									class="bi bi-view-list"></i> Listar - Linea de Producto</a>
+								<a class="dropdown-item" href="/productline/nuevo"><i class="bi bi-save"></i> Crear - Linea de Producto</a> 
+								<a class="dropdown-item" href="/productline/lista"><i class="bi bi-view-list"></i> Listar - Linea de Producto</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"><i class="bi bi-save"></i>
-									Crear - Producto</a> <a class="dropdown-item" href="#"><i
-									class="bi bi-view-list"></i> Listar - Producto</a>
-							</div></li>
+								<a class="dropdown-item" href="/producto/nuevo"><i class="bi bi-save"></i> Crear - Producto</a> 
+								<a class="dropdown-item" href="/producto/lista"><i class="bi bi-view-list"></i> Listar - Producto</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/empleado/nuevo"><i class="bi bi-view-list"></i> Listar - Empleado</a>
+								<a class="dropdown-item" href="/empleado/lista"><i class="bi bi-view-list"></i> Listar - Empleado</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/oficina/nueva"><i class="bi bi-view-list"></i> Listar - Empleado</a>								
+								<a class="dropdown-item" href="/oficina/lista"><i class="bi bi-view-list"></i> Listar - Oficina</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/compra/nueva"><i class="bi bi-save"></i> Crear - Compra</a> 
+								<a class="dropdown-item" href="/compra/lista"><i class="bi bi-view-list"></i> Listar - Compra</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/detalle/nuevo"><i class="bi bi-save"></i> Crear - Detalle de Compra</a> 
+								<a class="dropdown-item" href="/detalle/lista"><i class="bi bi-view-list"></i> Listar - Detalle de Compra</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/pago/nuevo"><i class="bi bi-save"></i> Crear - Pago</a> 
+								<a class="dropdown-item" href="/pago/lista"><i class="bi bi-view-list"></i> Listar - Pago</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/cliente/nuevo"><i class="bi bi-save"></i> Crear - Cliente</a> 
+								<a class="dropdown-item" href="/cliente/lista"><i class="bi bi-view-list"></i> Listar - Cliente</a>
+							</div>
+						</li>
+						<li th:if="${session.usuario!=null&&session.usuario.rol=='Sales Rep'}" class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+							href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu de Vendedor</a>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="/productline/nuevo"><i class="bi bi-save"></i> Crear - Linea de Producto</a> 
+								<a class="dropdown-item" href="/productline/lista"><i class="bi bi-view-list"></i> Listar - Linea de Producto</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/producto/nuevo"><i class="bi bi-save"></i> Crear - Producto</a> 
+								<a class="dropdown-item" href="/producto/lista"><i class="bi bi-view-list"></i> Listar - Producto</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/empleado/lista"><i class="bi bi-view-list"></i> Listar - Empleado</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/oficina/lista"><i class="bi bi-view-list"></i> Listar - Oficina</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/compra/nueva"><i class="bi bi-save"></i> Crear - Compra</a> 
+								<a class="dropdown-item" href="/compra/lista"><i class="bi bi-view-list"></i> Listar - Compra</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/detalle/nuevo"><i class="bi bi-save"></i> Crear - Detalle de Compra</a> 
+								<a class="dropdown-item" href="/detalle/lista"><i class="bi bi-view-list"></i> Listar - Detalle de Compra</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/pago/nuevo"><i class="bi bi-save"></i> Crear - Pago</a> 
+								<a class="dropdown-item" href="/pago/lista"><i class="bi bi-view-list"></i> Listar - Pago</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/cliente/nuevo"><i class="bi bi-save"></i> Crear - Cliente</a> 
+								<a class="dropdown-item" href="/cliente/lista"><i class="bi bi-view-list"></i> Listar - Cliente</a>
+							</div>
+						</li>
 					</ul>
-					<div th:if="${session.usuario!=null}" class="text-white mt-3 text-end">
+					<div th:if="${session.usuario!=null}"
+						class="text-white mt-3 text-end">
 						<form th:action="@{/logout}" method="POST">
-							<span>Bienvenido/a <span class="fst-italic badge bg-success text-wrap" th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}"></span></span>
-							<button th:text="${session.usuario.username}+' - Cerrar Sesión'" type="submit" class="btn btn-sm btn-outline-danger rounded-pill"></button>
+							<span>Bienvenido/a <span
+								class="fst-italic badge bg-success text-wrap"
+								th:text="${session.usuario.employee.firstName}+' '+${session.usuario.employee.lastName}"></span></span>
+							<button th:text="${session.usuario.username}+' - Cerrar Sesión'"
+								type="submit" class="btn btn-sm btn-outline-danger rounded-pill"></button>
 						</form>
 					</div>
 					<div th:if="${session.usuario==null}" class="row mt-3">
 						<div class="col text-end">
-							<button type="button" class="btn btn-sm btn-outline-success rounded-pill"
+							<button type="button"
+								class="btn btn-sm btn-outline-success rounded-pill"
 								data-bs-toggle="modal" data-bs-target="#login"
 								data-bs-whatever="Usuario">
 								Acceder <i class="bi bi-person-circle"></i>
 							</button>
-							<a type="button" class="btn btn-sm btn-outline-warning rounded-pill" href="/auth/registro">
-								Registrarce
-							</a>
+							<a type="button"
+								class="btn btn-sm btn-outline-warning rounded-pill"
+								href="/auth/registro"> Registrarce </a>
 						</div>
 					</div>
 					<!-- Modal -->
@@ -90,9 +138,9 @@
 													name="password">
 											</div>
 											<div class="text-center mt-3">
-											<a type="button" class="btn btn-secondary rounded-pill"
-												data-bs-dismiss="modal">Salir</a> <button type="submit"
-												class="btn btn-primary rounded-pill">Entrar</button>
+												<a type="button" class="btn btn-secondary rounded-pill"
+													data-bs-dismiss="modal">Salir</a>
+												<button type="submit" class="btn btn-primary rounded-pill">Entrar</button>
 											</div>
 										</div>
 									</form>

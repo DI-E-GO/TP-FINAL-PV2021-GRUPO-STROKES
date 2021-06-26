@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,21 +38,29 @@ public class EmployeeController {
 		this.offices = officeService.getOffices();
 		model.addAttribute("employee", employeeService.getEmployee());
 		model.addAttribute("offices", offices);
-		
+		model.addAttribute("employees", employeeService.getEmployees());
 		return "nuevoemployee";
 	}
 	
 	@PostMapping("/empleado/guardar")
-	public ModelAndView saveNewEmployee(Model model, @ModelAttribute(name = "employee") Employee employee) {
-		this.offices = officeService.getOffices();
-		ModelAndView modelView = new ModelAndView("nuevoemployee");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+employee.getFirstName()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("employee", employeeService.getEmployee());
-		modelView.addObject("offices", offices);
-		employeeService.addEmployee(employee);
-		
-		return modelView; 
+	public ModelAndView saveNewEmployee(Model model, @Valid @ModelAttribute(name = "employee") Employee employee, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			this.offices = officeService.getOffices();
+			modelView = new ModelAndView("nuevoemployee");
+			model.addAttribute("employees", employeeService.getEmployees());			
+			modelView.addObject("offices", offices);
+			return modelView;
+		} else {
+			this.offices = officeService.getOffices();
+			modelView = new ModelAndView("nuevoemployee");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+employee.getFirstName()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("employee", employeeService.getEmployee());
+			modelView.addObject("offices", offices);
+			employeeService.addEmployee(employee);
+			return modelView; 
+		}
 	}
 	
 	@GetMapping("/empleado/lista")

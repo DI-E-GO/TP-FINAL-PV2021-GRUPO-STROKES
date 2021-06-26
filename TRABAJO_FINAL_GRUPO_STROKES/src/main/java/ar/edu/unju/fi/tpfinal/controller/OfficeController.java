@@ -2,9 +2,12 @@ package ar.edu.unju.fi.tpfinal.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,15 +32,19 @@ public class OfficeController {
 	}
 	
 	@PostMapping("/oficina/guardar")
-	public ModelAndView saveNewOffice(Model model , @ModelAttribute(name = "office") Office office) {
-		
-		ModelAndView modelView = new ModelAndView("nuevaoffice");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+office.getOfficeCode()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("office", officeService.getOffice());
-		officeService.addOffice(office);
-		
-		return modelView; 
+	public ModelAndView saveNewOffice(Model model , @Valid @ModelAttribute(name = "office") Office office, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("nuevaoffice");
+			return modelView;
+		} else {
+			modelView = new ModelAndView("nuevaoffice");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+office.getOfficeCode()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("office", officeService.getOffice());
+			officeService.addOffice(office);
+			return modelView; 
+		}
 	}
 	
 	@GetMapping("/oficina/lista")

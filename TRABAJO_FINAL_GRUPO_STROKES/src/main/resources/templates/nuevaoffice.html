@@ -25,24 +25,40 @@
 								<label for="codof" class="col-sm-3 col-form-label fw-bold">Codigo de Oficina</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{officeCode}" id="codof" placeholder="Ingrese codigo de oficina" title="Ingrese codigo de oficina">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('officeCode')}" th:errors="*{officeCode}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="city" class="col-sm-3 col-form-label fw-bold">Provincia</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{city}" id="city" placeholder="Ingrese Provincia" title="Ingrese Provincia">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="telefono" class="col-sm-3 col-form-label fw-bold">N° de Telefono</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{phone}" id="telefono" placeholder="Ingrese numero de telefono" title="Ingrese numero de telefono">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="direccion" class="col-sm-3 col-form-label fw-bold">Direccion</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{addressLine1}" id="direccion" placeholder="Ingrese direccion" title="Ingrese su direccion">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
@@ -61,18 +77,30 @@
 								<label for="pais" class="col-sm-3 col-form-label fw-bold">País</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{country}" id="pais" placeholder="Ingrese Pais" title="Ingrese pais">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
 								<label for="codpostal" class="col-sm-3 col-form-label fw-bold">Codigo Postal</label>
 							    <div class="col-sm-9">
 							      <input type="text" class="form-control rounded-pill" th:field="*{postalCode}" id="codpostal" placeholder="Ingrese codigo postal" title="Ingrese codigo postal">
+							    <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+							    	</div>
 							    </div>
 							</div>
 							<div class="row mb-3">
-								<label for="territory" class="col-sm-3 col-form-label fw-bold">Barrio</label>
+								<label for="territory" class="col-sm-3 col-form-label fw-bold">Territorio</label>
 							    <div class="col-sm-9">
-							      <input type="text" class="form-control rounded-pill" th:field="*{territory}" id="territory" placeholder="Ingrese Barrio" title="Ingrese Barrio">
+							      <input type="text" class="form-control rounded-pill" th:field="*{territory}" id="territory" placeholder="Ingrese territorio" title="Ingrese Barrio">
+							     <!-- Message validation -->
+							    	<div class="ms-2">
+							    		<span class="col-8 form-text text-danger text-center" th:if="${#fields.hasErrors('territory')}" th:errors="*{territory}"></span>
+							    	</div>
 							    </div>
 							</div>
 							 <div class="pt-2 text-center">

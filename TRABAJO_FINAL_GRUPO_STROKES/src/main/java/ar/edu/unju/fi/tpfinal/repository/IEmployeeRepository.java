@@ -10,5 +10,5 @@ import ar.edu.unju.fi.tpfinal.model.Employee;
 public interface IEmployeeRepository extends CrudRepository<Employee, Long>{
 	public List<Employee> findAll();
 	public Optional<Employee> findByEmployeeNumber(Long employeeNumber);
-	public Employee findByEmployeeNumberAndEmailGreaterThanEqual(int numero, String email);
+	public Employee findByEmployeeNumberAndEmailGreaterThanEqual(Long numero, String email);
 }

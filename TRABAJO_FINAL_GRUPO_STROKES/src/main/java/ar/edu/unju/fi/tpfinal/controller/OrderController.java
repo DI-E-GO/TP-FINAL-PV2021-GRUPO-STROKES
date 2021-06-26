@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,15 +42,22 @@ public class OrderController {
 	}
 	
 	@PostMapping("/compra/guardar")
-	public ModelAndView saveNewOrder(Model model, @ModelAttribute(name = "order") Order order) {
-		this.customers = customerService.getCustomers();
-		ModelAndView modelView = new ModelAndView("nuevaorder");
-		String mensaje="Objeto guardado en la base de datos correctamente, "+order.getOrderNumber()+": ";
-		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("order", orderService.getOrder());
-		orderService.addOrder(order);
-		modelView.addObject("customers", customers);
-		return modelView;
+	public ModelAndView saveNewOrder(Model model, @Valid @ModelAttribute(name = "order") Order order, BindingResult result) {
+		ModelAndView modelView;
+		if (result.hasErrors()) {
+			modelView = new ModelAndView("nuevaorder");
+			modelView.addObject("customers", customerService.getCustomers());
+			return modelView;
+		} else {
+			this.customers = customerService.getCustomers();
+			modelView = new ModelAndView("nuevaorder");
+			String mensaje="Objeto guardado en la base de datos correctamente, "+order.getOrderNumber()+": ";
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("order", orderService.getOrder());
+			orderService.addOrder(order);
+			modelView.addObject("customers", customers);
+			return modelView;
+		}
 	}
 	
 	@GetMapping("/compra/lista")
