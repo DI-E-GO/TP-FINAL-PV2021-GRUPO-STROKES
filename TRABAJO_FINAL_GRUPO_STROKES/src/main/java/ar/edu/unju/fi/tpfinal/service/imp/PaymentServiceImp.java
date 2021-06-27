@@ -3,6 +3,7 @@
  */
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,5 +56,26 @@ public class PaymentServiceImp implements IPaymentService {
 		// TODO Auto-generated method stub
 		return paymentRepository.findAll();
 	}
+
+	@Override
+	public List<Payment> findPayments(Long customerNumber, double amount) {
+		
+		List<Payment> payments = new ArrayList<Payment>();
+		
+		if(customerNumber > 0 && amount ==0) {
+			payments = paymentRepository.findByCustomerNumberCustomerNumberEquals(customerNumber);
+		}else if(customerNumber==0 && amount > 0) {
+			payments = paymentRepository.findByAmountGreaterThanEqual(amount);
+		}else if(customerNumber > 0 && amount > 0) {
+			payments = paymentRepository.findByCustomerNumberCustomerNumberAndAmountGreaterThanEqual(customerNumber, amount);
+		}
+		else if(customerNumber == 0 && amount == 0) {
+			payments = paymentRepository.findAll();
+		}
+		
+		return payments;
+	}
+
+	
 
 }

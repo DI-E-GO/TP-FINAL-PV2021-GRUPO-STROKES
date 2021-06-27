@@ -14,6 +14,32 @@
 	</div>
 	<div class="container">
 		<div class="row">
+			<div class="col-md-10 ">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Busqueda de Pagos</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/pago/busqueda}" th:object="${payment}" method="GET">
+							<div class="row g-3">
+								<div class="col-md-5">
+									<label for="numc" class=" fw-bold mx-3">Número de Cliente</label>
+									<input type="number" class="form-control rounded-pill" th:field="*{customerNumber.customerNumber}" id="numc" placeholder="Ingrese numero de cliente" title="Ingrese numero de cliente">
+								</div>
+								<div class="col-md-5">
+									<label for="monto" class="fw-bold mx-3">Monto</label>
+									<input type="number" class="form-control rounded-pill" th:field="*{amount}" id="monto" placeholder="Ingrese monto" title="Ingrese monto">
+								</div>
+								<div class="col-md-2">
+								   <button type="submit" class="btn btn-primary mt-4">Buscar</button>
+							   </div>
+							</div>
+						</form>
+					</div>
+				</div>			
+			</div>
+		</div>
+		<div class="row">
 		<div class="border rounded-pill mt-3 pb-3 bg-dark-green text-white">
 			<h3 class="text-center mt-3">Listado de Pagos</h3>
 		</div>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Office;
@@ -82,6 +83,15 @@ public class OfficeController {
 		model.addAttribute("office", oficina);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
 		model.addAttribute("offices", officeService.getOffices());
+		
+		return "listaoffice";
+	}
+	
+	@GetMapping("/oficina/busqueda")
+	public String getOfficesFilter(@RequestParam(name = "country")String country, Model model, @ModelAttribute(name = "office") Office office) {
+		
+		model.addAttribute("office", officeService.getOffice());
+		model.addAttribute("offices", officeService.findOffices(office.getCity(), country));
 		
 		return "listaoffice";
 	}

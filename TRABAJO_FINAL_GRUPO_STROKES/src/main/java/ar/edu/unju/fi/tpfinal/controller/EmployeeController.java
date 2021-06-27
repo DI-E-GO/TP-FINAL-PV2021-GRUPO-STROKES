@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Employee;
@@ -99,6 +100,15 @@ public class EmployeeController {
 		model.addAttribute("employee", empleado);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
 		model.addAttribute("employees", employeeService.getEmployees());
+		
+		return "listaemployee";
+	}
+	
+	@GetMapping("/empleado/busqueda")
+	public String getEmployeesFilter(@RequestParam(name = "jobTitle") String jobTitle, Model model, @ModelAttribute(name = "employee") Employee employee) {
+		
+		model.addAttribute("employee", employeeService.getEmployee());
+		model.addAttribute("employees", employeeService.searchEmployees(employee.getLastName(), jobTitle));
 		
 		return "listaemployee";
 	}

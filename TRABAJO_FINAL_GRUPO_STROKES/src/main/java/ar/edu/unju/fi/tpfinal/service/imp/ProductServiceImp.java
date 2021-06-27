@@ -3,13 +3,12 @@
  */
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import ar.edu.unju.fi.tpfinal.model.Product;
 import ar.edu.unju.fi.tpfinal.repository.IProductRepository;
 import ar.edu.unju.fi.tpfinal.service.IProductService;
@@ -58,9 +57,21 @@ public class ProductServiceImp implements IProductService {
 	}
 
 	@Override
-	public void addProductCode(MultipartFile file, Product product) {
-		// TODO Auto-generated method stub
+	public List<Product> findProducts(String productLine, double buyPrice) {
 		
+		List<Product> products = new ArrayList<Product>();
+		if(!productLine.isEmpty() && buyPrice >= 0) {
+			products = productRepository.findByProductLineProductLineAndBuyPriceGreaterThanEqual(productLine, buyPrice);
+		}else if (productLine.isEmpty() && buyPrice >= 0) {
+			products = productRepository.findByBuyPriceGreaterThanEqual(buyPrice);
+		}
+		
+		
+		return products;
 	}
+
+	
+
+	
 
 }

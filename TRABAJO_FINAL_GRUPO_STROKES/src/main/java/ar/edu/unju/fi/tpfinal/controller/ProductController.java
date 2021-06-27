@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Product;
@@ -97,6 +98,15 @@ public class ProductController {
 		model.addAttribute("product", prod);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
 		model.addAttribute("products", productService.getProducts());
+		
+		return "listaproduct";
+	}
+	
+	@GetMapping("/producto/busqueda")
+	public String getProductsFilters(@RequestParam(name = "buyPrice") double buyPrice , Model model,@ModelAttribute(name = "product") Product product ) {
+		
+		model.addAttribute("product", productService.getProduct());
+		model.addAttribute("products", productService.findProducts(product.getProductLine().getProductLine(), buyPrice));
 		
 		return "listaproduct";
 	}

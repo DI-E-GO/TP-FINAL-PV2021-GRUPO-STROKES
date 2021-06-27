@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Customer;
@@ -95,6 +96,15 @@ public class PaymentController {
 		model.addAttribute("payment", pago);
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
 		model.addAttribute("payments", paymentService.getPayments());
+		
+		return "listapayment";
+	}
+	
+	@GetMapping("/pago/busqueda")
+	public String getPaymentsFilter(@RequestParam(name = "amount") double amount, Model model, @ModelAttribute(name = "payment") Payment payment) {
+		
+		model.addAttribute("payment", paymentService.getPayment());
+		model.addAttribute("payments", paymentService.findPayments(payment.getCustomerNumber().getCustomerNumber(), amount));
 		
 		return "listapayment";
 	}

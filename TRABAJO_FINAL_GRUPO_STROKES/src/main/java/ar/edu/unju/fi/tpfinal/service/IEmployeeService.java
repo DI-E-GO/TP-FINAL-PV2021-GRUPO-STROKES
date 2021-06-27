@@ -12,4 +12,5 @@ public interface IEmployeeService {
 	public Optional<Employee> getEmployee(Long employeeNumber);
 	public List<Employee> getEmployees();
 	public Employee searchEmployee(Long numero, String email);
+	public List<Employee> searchEmployees(String lastName, String jobTitle);
 }
