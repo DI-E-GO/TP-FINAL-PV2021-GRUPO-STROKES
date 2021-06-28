@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tpfinal.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tpfinal.model.Customer;
@@ -96,6 +98,11 @@ public class OrderController {
 		model.addAttribute("mensajeBorrar", mensajeBorrar);
 		model.addAttribute("orders", orderService.getOrder());
 		
+		return "listaorder";
+	}
+	@GetMapping("/compra/buscar")
+	public String searchOrderByDate(@RequestParam(name = "estado") String estado, Model model) {
+		model.addAttribute("orders", orderService.buscarPorEstado(estado));
 		return "listaorder";
 	}
 }

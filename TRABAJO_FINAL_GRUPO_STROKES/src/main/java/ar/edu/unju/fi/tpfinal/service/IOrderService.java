@@ -11,4 +11,5 @@ public interface IOrderService {
 	public void deleteOrder(Long orderNumber);
 	public Optional<Order> getOrder(Long orderNumber);
 	public List<Order> getOrders();
+	public List<Order> buscarPorEstado(String status);
 }

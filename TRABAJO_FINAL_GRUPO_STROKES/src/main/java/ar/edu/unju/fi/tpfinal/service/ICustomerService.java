@@ -11,4 +11,5 @@ public interface ICustomerService {
 	public void deleteCustomer(Long customerNumber);
 	public Optional<Customer> getCustomer(Long customerNumber);
 	public List<Customer> getCustomers();
+	public List<Customer> buscarPorCiudad(String ciudad);
 }

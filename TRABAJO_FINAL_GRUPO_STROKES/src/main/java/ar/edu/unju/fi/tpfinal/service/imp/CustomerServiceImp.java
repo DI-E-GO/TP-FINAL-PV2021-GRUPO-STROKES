@@ -56,4 +56,10 @@ public class CustomerServiceImp implements ICustomerService {
 		return customerRepository.findAll();
 	}
 
+	@Override
+	public List<Customer> buscarPorCiudad(String ciudad) {
+		// TODO Auto-generated method stub
+		return customerRepository.findByCountry(ciudad);
+	}
+
 }
