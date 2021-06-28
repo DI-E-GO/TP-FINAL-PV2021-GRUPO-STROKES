@@ -3,6 +3,7 @@
  */
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,6 +60,24 @@ public class EmployeeServiceImp implements IEmployeeService {
 	@Override
 	public Employee searchEmployee(Long numero, String email) {
 		return employeeRepository.findByEmployeeNumberAndEmailGreaterThanEqual(numero, email);
+	}
+
+	@Override
+	public List<Employee> searchEmployees(String lastName, String jobTitle) {
+		
+		List<Employee> employees = new ArrayList<Employee>();
+		
+		if(!lastName.isEmpty() && !jobTitle.isEmpty()) {
+			employees = employeeRepository.findByLastNameAndJobTitleLike(lastName, jobTitle);
+		}else if (!lastName.isEmpty() && jobTitle == "") {
+			employees = employeeRepository.findByLastNameLike(lastName);
+			
+		}else if (lastName == "" && !jobTitle.isEmpty()) {
+			employees = employeeRepository.findByJobTitleLike(jobTitle);
+		}else if(lastName == "" && jobTitle == "") {
+			employees = employeeRepository.findAll();
+		}
+		return employees;
 	}
 
 }

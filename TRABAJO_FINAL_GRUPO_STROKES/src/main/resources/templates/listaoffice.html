@@ -14,6 +14,32 @@
 	</div>
 	<div class="container">
 		<div class="row">
+			<div class="col-md-10 ">
+				<div class="card mt-4 mb-5 shadow-lg">
+					<div class="card-header text-center text-white">
+						<h2>Busqueda de Oficinas</h2>
+					</div>
+					<div class="card-body">
+						<form th:action="@{/oficina/busqueda}" th:object="${office}" method="GET">
+							<div class="row g-3">
+								<div class="col-md-5">
+									<label for="city" class=" fw-bold mx-4">Ciudad</label>
+									<input type="text" class="form-control rounded-pill" th:field="*{city}" id="city" placeholder="Ingrese ciudad" title="Ingrese ciudad">
+								</div>
+								<div class="col-md-5">
+									<label for="codp" class="fw-bold mx-4">Pais</label>
+									<input type="text" class="form-control rounded-pill" th:field="*{country}" id="codp" placeholder="Ingrese pais" title="Ingrese pais">
+								</div>
+								<div class="col-md-2">
+								   <button type="submit" class="btn btn-primary mt-4">Buscar</button>
+							   </div>
+							</div>
+						</form>
+					</div>
+				</div>			
+			</div>
+		</div>
+		<div class="row">
 		<div class="border rounded-pill mt-3 pb-3 bg-dark-green text-white">
 			<h3 class="text-center mt-3">Listado de Oficinas</h3>
 		</div>
@@ -23,13 +49,13 @@
 						<thead>
 							<tr>
 								<th scope="col">Código</th>
-								<th scope="col">Localidad</th>
+								<th scope="col">Ciudad</th>
 								<th scope="col">Telefono</th>
 								<th scope="col">Direccion</th>
 								<th scope="col">Direccion Secundaria</th>
 								<th scope="col">Pais</th>
 								<th scope="col">Codigo Postal</th>
-								<th scope="col">Barrio</th>
+								<th scope="col">Territorio</th>
 								<th scope="col">Acciones</th>
 							</tr>
 						</thead>

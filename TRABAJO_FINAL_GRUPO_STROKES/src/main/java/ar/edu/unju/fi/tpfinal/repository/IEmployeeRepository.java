@@ -11,4 +11,7 @@ public interface IEmployeeRepository extends CrudRepository<Employee, Long>{
 	public List<Employee> findAll();
 	public Optional<Employee> findByEmployeeNumber(Long employeeNumber);
 	public Employee findByEmployeeNumberAndEmailGreaterThanEqual(Long numero, String email);
+	public List<Employee> findByLastNameAndJobTitleLike(String lastName, String jobTitle);
+	public List<Employee> findByJobTitleLike(String jobTitle);
+	public List<Employee> findByLastNameLike(String lastName);
 }

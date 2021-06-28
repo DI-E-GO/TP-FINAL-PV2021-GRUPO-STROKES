@@ -11,4 +11,5 @@ public interface IPaymentService {
 	public void deletePayment(String checkNumber);
 	public Optional<Payment> getPayment(String checkNumber);
 	public List<Payment> getPayments();
+	public List<Payment> findPayments(Long customerNumber, double amount);
 }

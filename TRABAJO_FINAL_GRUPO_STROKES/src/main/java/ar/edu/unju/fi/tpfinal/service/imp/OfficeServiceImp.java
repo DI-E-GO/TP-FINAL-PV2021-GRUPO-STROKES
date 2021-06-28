@@ -3,6 +3,7 @@
  */
 package ar.edu.unju.fi.tpfinal.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,24 @@ public class OfficeServiceImp implements IOfficeService {
 	public List<Office> getOffices() {
 		// TODO Auto-generated method stub
 		return officeRepository.findAll();
+	}
+
+	@Override
+	public List<Office> findOffices(String city, String country) {
+		
+		List<Office> offices = new ArrayList<Office>();
+		
+		if(!city.isEmpty() && !country.isEmpty()) {
+			offices = officeRepository.findByCityAndCountryLike(city, country);
+		}else if (!city.isEmpty() && country.isEmpty()) {
+			offices = officeRepository.findByCityLike(city);
+		}else if (city.isEmpty() && !country.isEmpty()) {
+			offices = officeRepository.findByCountryLike(country);
+		}else if(city.isEmpty() && country.isEmpty()) {
+			offices = officeRepository.findAll();
+		}
+		
+		return offices;
 	}
 
 }

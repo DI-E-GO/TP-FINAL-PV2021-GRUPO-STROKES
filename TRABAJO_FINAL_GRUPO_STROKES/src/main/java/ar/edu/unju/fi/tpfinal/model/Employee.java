@@ -62,6 +62,7 @@ public class Employee {
 	
 	@OneToMany(mappedBy = "oneEmployee")
 	private List<Employee> reportsTo;
+	
 	@NotEmpty(message = "Ingrese el cargo del empleado")
 	@Column(name = "job_title")
 	private String jobTitle;
