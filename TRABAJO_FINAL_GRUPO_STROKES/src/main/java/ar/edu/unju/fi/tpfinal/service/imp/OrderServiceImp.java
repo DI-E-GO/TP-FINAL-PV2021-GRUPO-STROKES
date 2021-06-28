@@ -56,4 +56,10 @@ public class OrderServiceImp implements IOrderService {
 		return orderRepository.findAll();
 	}
 
+	@Override
+	public List<Order> buscarPorEstado(String status) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByStatus(status);
+	}
+
 }
